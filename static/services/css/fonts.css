@@ -1,0 +1,68 @@
+
+/* 
+This font is considered a proprietary software. To gain information about the laws regarding the use of these fonts, please visit www.fontiran.com
+--------------------------------------------------------------------------------------
+This set of fonts are used in this project under the license: (0PT2Z64G)
+--------------------------------------------------------------------------------------
+*/
+
+/* Estedad */
+@font-face {
+    font-family: 'Pinar';
+    src: url('../fonts/Pinar-DS1-FD.woff') format('woff');
+}
+@font-face {
+    font-family: 'Estedad';
+    src: url('../fonts/Estedad-VF-FD.woff2') format('woff2-variations');
+}
+body,p,a,ul,li,input,button{
+    font-family: Estedad, serif !important;
+    text-align: right!important;
+    direction:rtl;
+}
+h1,h2,h3,h4,h5,h6{
+   font-family: Pinar, serif !important;
+}
+p{
+    font-variation-settings: "wght" 200;
+}
+
+
+/* IranYekan */
+/*
+@font-face {
+  font-family: "IRANYekan";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/iranyekan/woff2/IRANYekanXFaNum-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IRANYekan";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/iranyekan/woff2/IRANYekanXFaNum-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IRANYekan";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/iranyekan/woff2/IRANYekanXFaNum-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IRANYekan";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/iranyekan/woff2/IRANYekanXFaNum-DemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "IRANYekan";
+  font-style: normal;
+  font-weight: bold;
+  src: url("../fonts/iranyekan/woff2/IRANYekanXFaNum-Bold.woff2") format("woff2");
+}
+body {
+  font-family: "IRANYekan";
+}
+*/
+

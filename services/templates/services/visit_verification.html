@@ -1,0 +1,78 @@
+{% extends '_base_services.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+
+{% block title %}{% trans 'Mobile verification' %}{% endblock %}
+
+{% block content %}
+
+    <main class="flex-grow bg-secondary-light pb-14 pt-36 dark:bg-primary-dark  xs:pt-36" style="background-color: transparent">
+        <div class="container pb-14">
+            <div class="grid grid-cols-12 gap-2 lg:gap-6">
+
+                <!-- Verification top ribbon  -->
+                <div class="col-span-12 rounded-lg bg-primary-light dark:bg-secondary-dark">
+                    <ol class="grid grid-cols-1 overflow-hidden rounded-lg">
+                        <li class="flex flex-col items-center justify-center gap-2 bg-tertiary-500/10 p-4 text-xs text-tertiary-500 dark:bg-tertiary-400/10 dark:text-tertiary-400 sm:text-sm md:text-base" style="background-color: #00A65C;">
+                            <p class="leading-none" style="font-size: 1.3em; color: #fefeff; font-weight: bold">{% trans 'Phone Number Verification' %}</p>
+                        </li>
+                  </ol>
+                </div>
+                <!-- end: Verification top ribbon -->
+
+                <!-- Verification  -->
+                <div class="col-span-12 md:col-span-12">
+                    <div class="rounded-lg bg-primary-light p-4 dark:bg-secondary-dark">
+                        <div class="col-span-5 md:col-span-3">
+                            <div class="grid grid-cols-1 items-center gap-6 mt-2">
+
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    <!-- Phone -->
+                                    <div class="col-span-2 md:col-span-1" style="margin-top: 5em; margin-bottom: 3em;">
+
+                                        <label style="margin-bottom: 3em;!important;" for="{{ form.phone_number.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-12">
+                                            <span style="font-size: large;" class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
+                                                {% trans 'Your Phone Number: ' %}
+                                            </span>
+                                            <input type="text" name="phone_number" value="{{ phone_number }}" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" readonly/>
+                                        </label>
+
+                                        <label style="margin-bottom: 1em;!important;" for="{{ form.phone_number.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-12">
+                                            <span style="font-size: large;" class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
+                                                {% trans 'Enter The Sent Approval Code' %}
+                                            </span>
+                                            <input type="number" name="otp" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" />
+                                        </label>
+
+                                        <p style="margin-top: 1.2em;!important; font-weight: normal;"><a href="{% url 'home' %}" style="text-decoration: none;">{% trans "Did not get the code?" %}</a></p>
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="col-span-2 flex justify-end">
+                                        <button style="padding: 1em 2.5em;!important;" type="submit" class="btn-primary w-full px-4 py-2 md:w-auto">{% trans 'Register in Hombaba' %}</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end: Verification  -->
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+
+
+

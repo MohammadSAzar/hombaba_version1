@@ -1,0 +1,161 @@
+{% extends '_base_profile.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans 'User Dashboard' %}{% endblock %}
+
+
+{% block two_buttons %}
+    <div class="nk-content" style="padding: 0;!important;">
+        <div class="container-fluid">
+            <div class="nk-content-inner">
+                <div class="nk-content-body" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                    <div class="nk-block-head nk-block-head-sm" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <ul class="nk-block-tools g-3" style="margin-bottom: 2px;!important;">
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'sale_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی فروش</span></a>
+                                    </li>
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'rent_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی اجاره</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="nk-block">
+        <div class="card card-bordered">
+            <div class="card-aside-wrap">
+
+                <div class="card-inner card-inner-lg">
+                    <!-- Title -->
+                    <div class="nk-block-head nk-block-head-lg">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <h4 class="nk-block-title">{% trans 'Personal Information' %}</h4>
+                                <div class="nk-block-des">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="nk-block-head-content align-self-start d-lg-none">
+                                <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Title -->
+
+                    <!-- Items -->
+                    {% if user.is_verified == 'a' %}
+                        <div class="nk-block">
+                            <div class="nk-data data-list">
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Phone Number' %}</span>
+                                        <span class="data-value" style="font-size: large">{{ user.phone_number }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Account Status' %}</span>
+                                        <span class="data-value" style="font-size: large; color: #00a65c">{% trans 'Verified' %}</span>
+                                    </div>
+                                </div>
+
+                                {% if user.is_agent == 'is' %}
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label" style="font-size: large">{% trans 'Is you agent?' %}</span>
+                                            <span class="data-value" style="font-size: large; color: #00a65c">شما مشاور همکار هومبابا هستید</span>
+                                        </div>
+                                    </div>
+                                {% elif user.is_agent == 'wt' %}
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label" style="font-size: large">{% trans 'Is you agent?' %}</span>
+                                            <span class="data-value" style="font-size: large; color: #99a025">شما در فرایند تایید به عنوان همکار هومبابا هستید</span>
+                                        </div>
+                                    </div>
+                                {% elif user.is_agent == 'nt' %}
+                                    <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                        <div class="data-col">
+                                            <span class="data-label" style="font-size: large">{% trans 'Is you agent?' %}</span>
+                                            <span class="data-value" style="font-size: large; color: #db4646">شما همکار هومبابا نیستید (در صورت تمایل به همکاری، از منوی کناری درخواست بدهید)</span>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" style="direction: ltr; margin-top: 1.5em">
+                                    <a href="{% url 'profile_info_edit' %}" class="btn btn-round btn-xl btn-primary" style="background-color: #00a65c; border: #00A65C; padding-left: 2em; padding-right: 2em;">{% trans 'Information Update' %}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% elif user.is_verified == 'n' %}
+                        <div class="nk-block">
+                            <div class="nk-data data-list">
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Phone Number' %}</span>
+                                        <span class="data-value" style="font-size: large">{{ user.phone_number }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Account Status' %}</span>
+                                        <span class="data-value" style="font-size: large; color: #db4646">{% trans 'Not Verified' %}</span>
+                                    </div>
+                                </div>
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit" style="direction: ltr; margin-top: 1.5em">
+                                    <a href="{% url 'profile_info_auth' %}" class="btn btn-round btn-xl btn-primary" style="background-color: #00a65c; border: #00A65C; padding-left: 2em; padding-right: 2em;">{% trans 'Verify Account' %}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% elif user.is_verified == 'i' %}
+                        <div class="nk-block">
+                            <div class="nk-data data-list">
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Phone Number' %}</span>
+                                        <span class="data-value" style="font-size: large">{{ user.phone_number }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
+                                    <div class="data-col">
+                                        <span class="data-label" style="font-size: large">{% trans 'Account Status' %}</span>
+                                        <span class="data-value" style="font-size: large; color: #99a025">{% trans 'In Progress' %}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    <!-- end: Items -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

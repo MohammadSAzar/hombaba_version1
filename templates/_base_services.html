@@ -1,0 +1,48 @@
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+<!doctype html>
+<html dir="rtl" lang="fa">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- CSS styles -->
+        <link href="{% static 'services/css/fonts.css' %}" rel="stylesheet">
+        <link href="{% static 'services/css/dependencies/swiper.min.css' %}" rel="stylesheet">
+        <link href="{% static 'services/css/app.css' %}" rel="stylesheet">
+        <link href="{% static 'services/css/theme.css' %}" rel="stylesheet">
+
+        <!-- JS scripts -->
+        <script src="{% static 'services/scripts/jquery-3.7.1.min.js' %}"></script>
+        <script defer src="{% static 'services/scripts/dependencies/flowbite.min.js' %}"></script>
+        <script defer src="{% static 'services/scripts/dependencies/swiper.min.js' %}"></script>
+        <script defer src="{% static 'services/scripts/app.js' %}"></script>
+        <script>
+            document.documentElement.classList.toggle(
+                "dark",
+                localStorage.getItem("theme") === "dark",
+            );
+        </script>
+        <!-- end: JS scripts -->
+
+        <!-- Fav -->
+        <link rel="icon" type="image/png" href="{% static 'main/img/logos/ho-fav.png' %}">
+
+        <!-- Title -->
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>
+
+
+
+

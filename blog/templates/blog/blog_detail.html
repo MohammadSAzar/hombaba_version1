@@ -1,0 +1,536 @@
+{% extends '_base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+
+    <!-- Messages -->
+    {% if messages %}
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true" style="margin-top: 7em;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="margin: 5px 0;!important;">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" style="margin-bottom: 0;!important; text-align: center;!important;">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- end: Messages -->
+
+    <!-- Blog detail -->
+    <div class="inner-page-content ptb--80  ptb-md--60">
+        <div class="container">
+            <div class="row">
+
+                <!-- Blog detail >>> sidebar -->
+                <div class="col-lg-3 order-lg-1">
+                    <div class="blog-sidebar pr--15 pr-lg--0">
+
+                        <!-- Blog sidebar >>> categories -->
+                        <div class="bl-widget author" style="margin-bottom: 2em;">
+                            <div class="inner">
+                                <div class="info">
+                                    <h4 class="mb--30" style="font-size: 1.1em; font-family: Estedad;!important;">{% trans 'Categories' %}</h4>
+                                    <ul class="social mb--20">
+                                        <li style="margin-bottom: 1.2em; border-bottom: 1px #e9e9e9 solid;"><a href="{% url 'blog_list' %}" style="line-height: 3em">{% trans 'All Categories Blogs' %}</a></li>
+                                        <li style="margin-bottom: 1.2em; border-bottom: 1px #e9e9e9 solid;"><a href="{% url 'category_educational' %}" style="line-height: 3em">{% trans 'Educational Blog Articles' %}</a></li>
+                                        <li style="margin-bottom: 1.2em; border-bottom: 1px #e9e9e9 solid;"><a href="{% url 'category_analytical' %}" style="line-height: 3em">{% trans 'Analytical Blog Articles' %}</a></li>
+                                        <li style="margin-bottom: 1.2em; border-bottom: 1px #e9e9e9 solid;"><a href="{% url 'category_news' %}" style="line-height: 3em">{% trans 'News Blog Articles' %}</a></li>
+                                        <li style="margin-bottom: 1.2em; border-bottom: 1px #e9e9e9 solid;"><a href="{% url 'category_hombaba' %}" style="line-height: 3em">{% trans 'Hombaba Blog Articles' %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end: Blog sidebar >>> categories -->
+
+                        <!-- Blog sidebar >>> last blogs -->
+                        <div class="bl-widget author">
+                            <div class="inner">
+                                <div class="info">
+                                    <h4 class="mb--30" style="font-size: 1.1em; font-family: Estedad;!important;">{% trans 'Latest Articles' %}</h4>
+                                    <ul class="social mb--20">
+                                        {% for blog in blogs %}
+                                            <li style="margin-bottom: 1.2em;">
+                                                <a href="{{ blog.get_absolute_url }}" style="font-size: smaller; line-height: 3em">{{ blog.title|farsi_number }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end: Blog sidebar >>> last blogs -->
+
+                    </div>
+                </div>
+                <!-- end: Blog detail >>> sidebar -->
+
+                <!-- Blog detail >>> main -->
+                <div class="col-lg-9 order-lg-2 mb-md--50">
+                    <div class="row">
+                        <div class="col-12 mb--45">
+                            <article class="blog format-standard">
+                                <div class="blog__inner">
+
+                                    <div class="blog__media">
+                                        <figure class="image">
+                                            <img src="{{ blog.cover.url }}" alt="Blog" class="w-100">
+                                        </figure>
+                                    </div>
+
+                                    <div class="blog__info" >
+                                        <h1 class="blog__title" style="font-size: 1.6em; margin-bottom: 1em;">{{ blog.title|farsi_number }}</h1>
+
+                                        <div class="single-post__header-meta">
+                                            <span class="posted-on"><span>{% trans 'Publication Date' %}: </span>{{ blog.date_creation|to_jalali:'%y/%m/%d' }}</span>
+                                            <span class="post-category"><span>{% trans 'Category' %}: </span>{{ blog.blog_category }}</span>
+                                        </div>
+
+                                        <div class="blog__desc" style="margin-top: 2em; text-align: justify;!important;">
+                                            {{ blog.body.html|safe|linebreaksbr }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <!-- end: Blog detail >>> main -->
+
+                <!-- Blog detail >>> comments -->
+                <section class="comment col-lg-12 order-lg-3">
+                    <p class="comment-title"><span style="margin: 0 10px; color: black;">"{{ number_of_comments }}"</span> نظر ثبت شده است</p>
+
+                    <!-- Comment & Replies -->
+                    <ul class="comment-list mb--45">
+                        {% for comment in comments %}
+
+                            <li>
+                                <!-- Comment >>> detail -->
+                                <div class="single-comment">
+                                    <div class="comment-info">
+                                        <div class="comment-meta">
+                                            <h4>{{ comment.name }}</h4>
+                                            <div class="metadata">
+                                                <span class="comment-date">{{ comment.date_creation|to_jalali }}</span>
+                                                <button class="comment-reply-link" data-reply-form="reply-form-{{ comment.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                            </div>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p>{{ comment.body }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Comment >>> next form -->
+                                <form action="" id="reply-form-{{ comment.id }}" style="display: none;" method="POST" class="form comment-form">
+                                    {% csrf_token %}
+
+                                    <!-- Comment name -->
+                                    <div class="form__group mb--25 mb-sm--20">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-sm--20">
+{#                                                <label for="{{ reply_form.reply_name.id_for_label }}">Name:</label>#}
+                                                {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+{#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comment body -->
+                                    <div class="form__group mb--25 mb-sm--20">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+{#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="{{ comment.pk }}" name="parent_comment">
+
+                                    <!-- Comment button -->
+                                    <div class="form__group">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-size-sm">{% trans 'Submit Comment' %}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <ul class="children">
+                                    {% for reply in comment.replies.all %}
+                                        <li>
+                                            <!-- Reply 111111 >>> detail -->
+                                            <div class="single-comment" style="background-color: #fefefe">
+                                                <div class="comment-info">
+                                                    <div class="comment-meta">
+                                                        <h4>{{ reply.reply_name }}</h4>
+                                                        <div class="metadata">
+                                                            <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                            <button class="comment-reply-link" data-reply-form="reply-form-{{ reply.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <p>{{ reply.body }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Reply 222222 >>> next form -->
+                                            <form action="" id="reply-form-{{ reply.id }}" style="display: none;" method="POST" class="form comment-form">
+                                                {% csrf_token %}
+
+                                                <!-- Reply name -->
+                                                <div class="form__group mb--25 mb-sm--20">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-sm--20">
+                                                            {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+            {#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Reply body -->
+                                                <div class="form__group mb--25 mb-sm--20">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+            {#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" value="{{ reply.pk }}" name="parent_reply">
+
+                                                <!-- Reply button -->
+                                                <div class="form__group">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                            <ul class="children">
+                                                {% for reply in reply.replies_pr.all %}
+                                                    <li>
+                                                        <!-- Reply 333333 >>> detail -->
+                                                        <div class="single-comment" style="background-color: #fdfdfd">
+                                                            <div class="comment-info">
+                                                                <div class="comment-meta">
+                                                                    <h4>{{ reply.reply_name }}</h4>
+                                                                    <div class="metadata">
+                                                                        <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                                        <button class="comment-reply-link" data-reply-form="reply-form-{{ reply.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="comment-content">
+                                                                    <p>{{ reply.body }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Reply 333333 >>> next form -->
+                                                        <form action="" id="reply-form-{{ reply.id }}" style="display: none;" method="POST" class="form comment-form">
+                                                            {% csrf_token %}
+
+                                                            <!-- Reply name -->
+                                                            <div class="form__group mb--25 mb-sm--20">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mb-sm--20">
+                                                                        {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+                        {#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Reply body -->
+                                                            <div class="form__group mb--25 mb-sm--20">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+                        {#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" value="{{ reply.pk }}" name="parent_reply">
+
+                                                            <!-- Reply button -->
+                                                            <div class="form__group">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+
+                                                        <ul class="children">
+                                                            {% for reply in reply.replies_pr.all %}
+                                                                <li>
+                                                                    <!-- Reply 444444 >>> detail -->
+                                                                    <div class="single-comment" style="background-color: #fcfcfc">
+                                                                        <div class="comment-info">
+                                                                            <div class="comment-meta">
+                                                                                <h4>{{ reply.reply_name }}</h4>
+                                                                                <div class="metadata">
+                                                                                    <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                                                    <button class="comment-reply-link" data-reply-form="reply-form-{{ reply.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="comment-content">
+                                                                                <p>{{ reply.body }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Reply 444444 >>> next form -->
+                                                                    <form action="" id="reply-form-{{ reply.id }}" style="display: none;" method="POST" class="form comment-form">
+                                                                        {% csrf_token %}
+
+                                                                        <!-- Reply name -->
+                                                                        <div class="form__group mb--25 mb-sm--20">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 mb-sm--20">
+                                                                                    {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+                                    {#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Reply body -->
+                                                                        <div class="form__group mb--25 mb-sm--20">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+                                    {#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="hidden" value="{{ reply.pk }}" name="parent_reply">
+
+                                                                        <!-- Reply button -->
+                                                                        <div class="form__group">
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+
+
+                                                                    <ul class="children">
+                                                                        {% for reply in reply.replies_pr.all %}
+                                                                            <li>
+                                                                                <!-- Reply 555555 >>> detail -->
+                                                                                <div class="single-comment" style="background-color: #fbfbfb">
+                                                                                    <div class="comment-info">
+                                                                                        <div class="comment-meta">
+                                                                                            <h4>{{ reply.reply_name }}</h4>
+                                                                                            <div class="metadata">
+                                                                                                <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                                                                <button class="comment-reply-link" data-reply-form="reply-form-{{ reply.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="comment-content">
+                                                                                            <p>{{ reply.body }}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Reply 555555 >>> next form -->
+                                                                                <form action="" id="reply-form-{{ reply.id }}" style="display: none;" method="POST" class="form comment-form">
+                                                                                    {% csrf_token %}
+
+                                                                                    <!-- Reply name -->
+                                                                                    <div class="form__group mb--25 mb-sm--20">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12 mb-sm--20">
+                                                                                                {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+                                                {#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <!-- Reply body -->
+                                                                                    <div class="form__group mb--25 mb-sm--20">
+                                                                                        <div class="row">
+                                                                                            <div class="col-12">
+                                                                                                {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+                                                {#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="hidden" value="{{ reply.pk }}" name="parent_reply">
+
+                                                                                    <!-- Reply button -->
+                                                                                    <div class="form__group">
+                                                                                        <div class="row">
+                                                                                            <div class="col-12">
+                                                                                                <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+
+
+                                                                                <ul class="children">
+                                                                                    {% for reply in reply.replies_pr.all %}
+                                                                                        <li>
+                                                                                            <!-- Reply 66666 >>> detail -->
+                                                                                            <div class="single-comment" style="background-color: #fafafa">
+                                                                                                <div class="comment-info">
+                                                                                                    <div class="comment-meta">
+                                                                                                        <h4>{{ reply.reply_name }}</h4>
+                                                                                                        <div class="metadata">
+                                                                                                            <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                                                                            <button class="comment-reply-link" data-reply-form="reply-form-{{ reply.id }}" style="border: none; background-color: transparent;"><img src="{% static 'main/img/icons/reply.png' %}" style="width: 20px; height: 20px;"></button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="comment-content">
+                                                                                                        <p>{{ reply.body }}</p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <!-- Reply 66666 >>> next form -->
+                                                                                            <form action="" id="reply-form-{{ reply.id }}" style="display: none;" method="POST" class="form comment-form">
+                                                                                                {% csrf_token %}
+
+                                                                                                <!-- Reply name -->
+                                                                                                <div class="form__group mb--25 mb-sm--20">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12 mb-sm--20">
+                                                                                                            {% render_field reply_form.reply_name type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*" %}
+                                                            {#                                                <input type="text" name="reply_name" id="reply_name" class="form__input" placeholder="نام*">#}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <!-- Reply body -->
+                                                                                                <div class="form__group mb--25 mb-sm--20">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-12">
+                                                                                                            {% render_field reply_form.body name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*" %}
+                                                            {#                                                <textarea name="reply_body" id="reply_body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>#}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <input type="hidden" value="{{ reply.pk }}" name="parent_reply">
+
+                                                                                                <!-- Reply button -->
+                                                                                                <div class="form__group">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-12">
+                                                                                                            <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+
+
+                                                                                            <ul class="children">
+                                                                                                {% for reply in reply.replies_pr.all %}
+                                                                                                    <li>
+                                                                                                        <!-- Reply 77777 >>> detail -->
+                                                                                                        <div class="single-comment" style="background-color: #fafafa">
+                                                                                                            <div class="comment-info">
+                                                                                                                <div class="comment-meta">
+                                                                                                                    <h4>{{ reply.reply_name }}</h4>
+                                                                                                                    <div class="metadata">
+                                                                                                                        <span class="comment-date">{{ reply.date_creation|to_jalali }}</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="comment-content">
+                                                                                                                    <p>{{ reply.body }}</p>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </li>
+                                                                                                {% endfor %}
+                                                                                            </ul>
+
+                                                                                        </li>
+                                                                                    {% endfor %}
+                                                                                </ul>
+
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    </ul>
+
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+
+                        {% endfor %}
+                    </ul>
+                    <!-- end: Comment & Replies -->
+
+                    <!-- Comment form -->
+                    <div class="comment-respond">
+                        <h3 class="comment-reply-title">{% trans 'Write a Comment' %}</h3>
+                        <form action="" method="POST" class="form comment-form">
+                            {% csrf_token %}
+
+                            <!-- Comment name -->
+                            <div class="form__group mb--25 mb-sm--20">
+                                <div class="row">
+                                    <div class="col-md-12 mb-sm--20">
+                                        <input type="text" name="name" id="name" class="form__input" placeholder="نام*">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment body -->
+                            <div class="form__group mb--25 mb-sm--20">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <textarea name="body" id="body" class="form__input form__input--textarea" placeholder="پیام*"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment button -->
+                            <div class="form__group">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-size-sm" style="margin-bottom: 20px;">{% trans 'Submit Comment' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- end: Comment form -->
+
+                </section>
+                <!-- end: Blog detail >>> comments -->
+
+            </div>
+        </div>
+    </div>
+    <!-- end: Blog detail -->
+
+{% endblock %}

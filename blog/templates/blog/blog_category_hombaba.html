@@ -1,0 +1,114 @@
+{% extends '_base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load i18n %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans 'Blog Homebia' %}{% endblock %}
+
+{% block content %}
+
+    <!-- Blog category choices -->
+    <div class="ptb--80" style="background-color: #dbf3f2;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="page-title" style="color: rgb(0, 51, 121)">{% trans 'Hombaba Blog: Real Estate Magazine' %}</h1>
+                    <ul class="breadcrumb" style="margin-top: 4em;">
+                        <li style="margin-right: 0;!important;"><a href="{% url 'category_hombaba' %}" style="color: rgb(0, 51, 121); margin-right: 20px; margin-left: 20px; border-bottom: solid 1px rgb(0, 51, 121);">{% trans 'Hombaba Blogs' %}</a></li>
+                        <li style="margin-right: 0;!important;"><a href="{% url 'category_news' %}" style="color: rgb(0, 51, 121); margin-right: 20px; margin-left: 20px;">{% trans 'News Blogs' %}</a></li>
+                        <li style="margin-right: 0;!important;"><a href="{% url 'category_analytical' %}" style="color: rgb(0, 51, 121); margin-right: 20px; margin-left: 20px;">{% trans 'Analytical Blogs' %}</a></li>
+                        <li style="margin-right: 0;!important;"><a href="{% url 'category_educational' %}" style="color: rgb(0, 51, 121); margin-right: 20px; margin-left: 20px;">{% trans 'Educational Blogs' %}</a></li>
+                        <li style="margin-right: 0;!important;"><a href="{% url 'blog_list' %}" style="color: rgb(0, 51, 121); margin-right: 20px; margin-left: 20px;">{% trans 'All Blogs' %}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: Blog category choices -->
+
+     <!-- Blog main -->
+    <main class="main-content-wrapper">
+        <div class="inner-page-content ptb--80 ptb-md--60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Blog >>> posts -->
+                        <div class="row" style="margin-bottom: 4em;">
+                            {% for blog in blogs %}
+                                <div class="col-xl-4 col-lg-6 mb--50">
+                                    <article class="blog format-standard" style="margin-bottom: 5em;">
+                                        <div class="blog__inner">
+                                            <div class="blog__media">
+                                                <figure class="image">
+                                                    <img src="{{ blog.cover.url }}" alt="Blog Image" class="w-100">
+                                                    <a href="{{ blog.get_absolute_url }}" class="item-overlay"></a>
+                                                </figure>
+                                            </div>
+                                            <div class="blog__info">
+                                                <h2 class="blog__title" style="font-weight: bold;"><a href="{{ blog.get_absolute_url }}">{{ blog.title|farsi_number }}</a></h2>
+                                                <div class="blog__meta">
+                                                    <span class="posted-on">{% trans 'Publication Date' %}: {{ blog.date_creation|to_jalali }}</span>
+                                                </div>
+                                                <div class="blog__meta">
+                                                    <span class="posted-on">{% trans 'Category' %}: {{ blog.blog_category }}</span>
+                                                </div>
+                                                <a href="{{ blog.get_absolute_url }}" class="btn btn-outline btn-brw-2" data-animation="fadeInUp" data-duration=".3s" data-delay=".6s" style="line-height: 0.6em; font-weight: normal; float: left">{% trans 'Read More' %}</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <!-- end: Blog >>> posts -->
+
+                        <!-- Pagination -->
+                        <div class="my-pagination">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; {% trans 'First' %}</a>
+                            {% else %}
+                                <span class="my-disabled">&laquo; {% trans 'First' %}</span>
+                            {% endif %}
+
+                            {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}">‹ {% trans 'Previous' %}</a>
+                            {% else %}
+                                <span class="my-disabled">‹ {% trans 'Previous' %}</span>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if num == page_obj.number %}
+                                    <span class="my-current">{{ num }}</span>
+                                {% else %}
+                                    <a href="?page={{ num }}">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">{% trans 'Next' %} ›</a>
+                            {% else %}
+                                <span class="my-disabled">{% trans 'Next' %} ›</span>
+                            {% endif %}
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.paginator.num_pages }}">{% trans 'Last Page' %} &raquo;</a>
+                            {% else %}
+                                <span class="my-disabled">{% trans 'Last Page' %} &raquo;</span>
+                            {% endif %}
+                        </div>
+                        <!-- end: Pagination -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- end: Blog main -->
+
+{% endblock %}

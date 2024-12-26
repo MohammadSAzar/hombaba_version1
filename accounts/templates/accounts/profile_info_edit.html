@@ -1,0 +1,137 @@
+{% extends '_base_profile.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans 'Profile Update' %}{% endblock %}
+
+
+{% block two_buttons %}
+    <div class="nk-content " style="padding: 0;!important;">
+        <div class="container-fluid">
+            <div class="nk-content-inner">
+                <div class="nk-content-body" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                    <div class="nk-block-head nk-block-head-sm" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <ul class="nk-block-tools g-3" style="margin-bottom: 2px;!important;">
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'sale_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی فروش</span></a>
+                                    </li>
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'rent_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی اجاره</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% if user.is_verified == 'a' %}
+        <div class="nk-block">
+            <div class="card card-bordered">
+                <div class="card-aside-wrap">
+                    <div class="card-inner card-inner-lg">
+
+                        <!-- Title -->
+                        <div class="nk-block-head nk-block-head-lg">
+                            <div class="nk-block-between">
+                                <div class="nk-block-head-content">
+                                    <h4 class="nk-block-title">{% trans 'Personal Information Edit' %}</h4>
+                                    <div class="nk-block-des" style="margin-top: 0.8em;">
+                                        <p>با توجه به تایید شدن حساب کاربری، امکان تغییر اطلاعات هویتی وجود ندارد.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end: Title -->
+
+                        <!-- Form -->
+                        <form method="post" class="px-3 form-style-two" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <!-- Province -->
+                                <div class="col-sm-6 mb-md-4 pb-3">
+                                    <label for="{{ form.province.id_for_label }}" class="form-label form-label-lg">{% trans 'Province' %}</label>
+                                    {% render_field form.province type="text" id="province" class="form-control form-control-xl" %}
+                                    {% if form.province.errors %}
+                                        {% for error in form.province.errors %}
+                                            <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <!-- City -->
+                                <div class="col-sm-6 mb-md-4 pb-3">
+                                    <label for="{{ form.city.id_for_label }}" class="form-label form-label-lg">{% trans 'City' %}</label>
+                                    {% render_field form.city type="text" id="city" class="form-control form-control-xl" %}
+                                    {% if form.city.errors %}
+                                        {% for error in form.city.errors %}
+                                            <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <!-- Postal Code -->
+                                <div class="col-sm-6 mb-md-4 pb-3 ">
+                                    <label for="{{ form.postal_code.id_for_label }}" class="form-label form-label-lg">{% trans 'Postal Code' %}</label>
+                                    {% render_field form.postal_code type="number" id="postal_code" class="form-control form-control-xl" %}
+                                    {% if form.postal_code.errors %}
+                                        {% for error in form.postal_code.errors %}
+                                            <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-sm-6 mb-md-4 pb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label form-label-lg">{% trans 'Email' %}</label>
+                                    {% render_field form.email type="email" id="email" class="form-control form-control-xl" %}
+                                    {% if form.email.errors %}
+                                        {% for error in form.email.errors %}
+                                            <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <!-- Address -->
+                                <div class="col-sm-12 mb-md-4 pb-3">
+                                    <label for="{{ form.address.id_for_label }}" class="form-label form-label-lg">{% trans 'Address' %}</label>
+                                    {% render_field form.address type="text" id="address" class="form-control form-control-xl" %}
+                                    {% if form.address.errors %}
+                                        {% for error in form.address.errors %}
+                                            <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="text-end py-md-3">
+                                <button type="submit" class="btn btn-lg btn-primary px-md-4 mt-lg-3">
+                                    <span class="px-md-3">{% trans 'Submit' %}</span>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- end: Form -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif user.is_verified == 'i' %}
+        <h3 style="text-align: center; margin-top: 5em">در حال حاضر به این امکان دسترسی ندارید</h3>
+        <div style="margin-top: 3em; text-align: center;"><span>پس از تعیین وضعیت حساب کاربری شما توسط ادمین، امکان دسترسی خواهید داشت.</span></div>
+    {% elif user.is_verified == 'n' %}
+        <h3 style="text-align: center; margin-top: 5em">در حال حاضر به این امکان دسترسی ندارید</h3>
+        <div style="margin-top: 3em; text-align: center;"><span>ابتدا باید حساب کاربری خود را از بخش "تایید حساب کاربری" در منو کناری، تایید کنید.</span></div>
+    {% endif %}
+{% endblock %}
+

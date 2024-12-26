@@ -1,0 +1,63 @@
+{% extends '_base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+
+{% block title %}{% trans 'Contact' %}{% endblock %}
+
+{% block content %}
+
+    <!-- Contact -->
+    <main  class="main-content-wrapper">
+        <div class="inner-page-content pt--75 pt-md--55">
+            <section class="contact-area mb--75 mb-md--55">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-5 mb-sm--30">
+                            <div class="heading mb--32">
+                                <h2>اطلاعات تماس</h2>
+                                <hr class="delimeter">
+                            </div>
+                            <div class="contact-info mb--20">
+                                <p>تهران، میرداماد، آرش شرقی، کافه هایک</p>
+                                <p>شماره ثابت: 22334455-021</p>
+                                <p>همراه - واتساپ - تلگرام: 9199187-0919</p>
+                                <p>ایمیل: hombaba@hombaba.com</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7 offset-lg-1">
+                            <div class="heading mb--40">
+                                <h2>شبکه‌های اجتماعی</h2>
+                                <hr class="delimeter">
+                            </div>
+                            <div class="logo">
+                                <a href="{% url 'home' %}" class="logo--normal" style="margin-left: 4em;">
+                                    <img src="{% static 'main/img/contact/in48.png' %}" alt="Logo">
+                                </a>
+                                <a href="{% url 'home' %}" class="logo--normal" style="margin-left: 4em;">
+                                    <img src="{% static 'main/img/contact/yt48.png' %}" alt="Logo">
+                                </a>
+                                <a href="{% url 'home' %}" class="logo--normal" style="margin-left: 4em;">
+                                    <img src="{% static 'main/img/contact/li48.png' %}" alt="Logo">
+                                </a>
+                                <a href="{% url 'home' %}" class="logo--normal" style="margin-left: 4em;">
+                                    <img src="{% static 'main/img/contact/ap48.png' %}" alt="Logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- end: Contact -->
+
+
+{% endblock %}
+
+
+

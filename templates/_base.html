@@ -1,0 +1,478 @@
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible " content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/line-awesome.min.css' %}">
+
+    <!-- Fav -->
+    <link rel="shortcut icon" href="{% static 'main/img/logos/ho-fav.png' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'main/img/logos/ho-fav.png' %}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+    <!-- Preloader Start -->
+    <div class="ft-preloader active">
+        <div class="ft-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ft-child ft-bounce1"></div>
+            <div class="ft-child ft-bounce2"></div>
+            <div class="ft-child ft-bounce3"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- Main -->
+    <div class="wrapper">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header__inner fixed-header">
+                <div class="header__main">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="header__main-inner" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+
+                                    <!-- Logo -->
+                                    <div class="header__main" style="margin-right: 0.5em; margin-left: 20px;!important;">
+                                        <div class="logo">
+                                            <a href="{% url 'home' %}" class="logo--normal">
+                                                <img src="{% static 'main/img/logos/ho-logo-0.png' %}" style="width: 100px; height: 154px;" alt="Logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- end: Logo -->
+
+                                    <!-- Menu -->
+                                    <div class="header__main-center">
+                                        <nav class="main-navigation text-center d-none d-lg-block" style="padding-right: 0.1em;">
+                                            <ul class="mainmenu">
+
+                                                <li class="mainmenu__item menu-item-has-children" style="padding-left: 40px;">
+                                                    <a href="#" class="mainmenu__link"><span class="mm-text" style=" color: #00A65C; font-weight: bold;">{% trans 'Services' %}</span></a>
+                                                    <ul class="sub-menu">
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'counseling' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Counseling' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'session' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Participation in Session' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'visit' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Participation in Visit' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'case_list' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Investment Opportunities' %}</span></a></li>
+                                                        <li class="menu-item-has-children"><a href="#"><span class="mm-text" style="font-weight: bold;  color: #00A65C;">{% trans 'Course' %}</span></a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="{% url 'home' %}" class="mainmenu__link">
+                                                        <span class="mm-text" style="font-weight: bold;">{% trans 'Files' %}</span>
+                                                        <ul class="sub-menu">
+                                                            <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'trade_session' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Do Trade' %}</span></a></li>
+                                                            <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'sale_file_list' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Sale Files' %}</span></a></li>
+                                                            <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'rent_file_list' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Rent Files' %}</span></a></li>
+                                                            {% if user.is_authenticated %}
+                                                                <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'sale_file_create' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Sale File Submit' %}</span></a></li>
+                                                            {% else %}
+                                                                <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'registration' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Sale File Submit' %}</span></a></li>
+                                                            {% endif %}
+                                                            {% if user.is_authenticated %}
+                                                                <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'rent_file_create' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Rent File Submit' %}</span></a></li>
+                                                            {% else %}
+                                                                <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'registration' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Rent File Submit' %}</span></a></li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </a>
+                                                </li>
+
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="#" class="mainmenu__link"><span class="mm-text" style="font-weight: bold;">{% trans 'Links' %}</span></a>
+                                                    <ul class="sub-menu">
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'blog_list' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Hombaba Blog' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'contact' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Contact Us' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'about' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'About Us' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'rules' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Rules' %}</span></a></li>
+                                                        <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'faq' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'FAQ' %}</span></a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    {% if user.is_authenticated %}
+                                                        <a href="{% url 'profile_info_now' %}" class="mainmenu__link">
+                                                            <span class="mm-text" style="font-weight: bold;">{% trans 'User Dashboard' %}</span>
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{% url 'registration' %}" class="mainmenu__link">
+                                                            <span class="mm-text" style="font-weight: bold;">{% trans 'Login / Signup' %}</span>
+                                                        </a>
+                                                    {% endif %}
+                                                </li>
+
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="http://127.0.0.1:8000/admin/" class="mainmenu__link">
+                                                        <span class="mm-text" style="font-weight: bold;">پنل ادمین</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <!-- end: Menu -->
+
+                                    <!-- File Submit -->
+                                    <div class="header__main-right">
+                                        <div class="header-toolbar-wrap">
+                                            <ul>
+
+                                                <li style="margin-bottom: 3px;">
+                                                    <div class="header-toolbar">
+                                                        {% if user.is_authenticated %}
+                                                            <a href="{% url 'sale_file_create' %}" class="btn btn-outline btn-size-md btn-color-primary btn-shape-round btn-hover-2" style="width: 167px; margin-left: 0.5em;">{% trans 'ثبت آگهی فروش' %}</a>
+                                                            <div class="header-toolbar__item d-block d-lg-none">
+                                                                <a href="#offcanvasMenu" class="header-toolbar__btn toolbar-btn menu-btn">
+                                                                    <div class="hamburger-icon">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        {% else %}
+                                                            <a href="{% url 'registration' %}" class="btn btn-outline btn-size-md btn-color-primary btn-shape-round btn-hover-2" style="width: 167px; margin-left: 0.5em;">{% trans 'ثبت آگهی فروش' %}</a>
+                                                            <div class="header-toolbar__item d-block d-lg-none">
+                                                                <a href="#offcanvasMenu" class="header-toolbar__btn toolbar-btn menu-btn">
+                                                                    <div class="hamburger-icon">
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                        <span></span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </li>
+
+                                                <li style="margin-top: 3px;">
+                                                    <div class="header-toolbar">
+                                                        {% if user.is_authenticated %}
+                                                            <a href="{% url 'rent_file_create' %}" class="btn btn-outline btn-size-md btn-color-primary btn-shape-round btn-hover-2" style="width: 167px; margin-left: 0.5em;">{% trans 'ثبت آگهی اجاره' %}</a>
+                                                            <div class="header-toolbar__item d-block d-lg-none">
+                                                                <div class="header-toolbar__btn toolbar-btn menu-btn">
+{#                                                                    <div class="hamburger-icon">#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                    </div>#}
+                                                                </div>
+                                                            </div>
+                                                        {% else %}
+                                                            <a href="{% url 'registration' %}" class="btn btn-outline btn-size-md btn-color-primary btn-shape-round btn-hover-2" style="width: 167px; margin-left: 0.5em;">{% trans 'ثبت آگهی اجاره' %}</a>
+                                                            <div class="header-toolbar__item d-block d-lg-none">
+                                                                <div class="header-toolbar__btn toolbar-btn menu-btn">
+{#                                                                    <div class="hamburger-icon">#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                        <span></span>#}
+{#                                                                    </div>#}
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- end: File Submit -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end: Header -->
+
+
+        <!-- Main content -->
+        <main class="main-content-wrapper">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+        <!-- end: Main content -->
+
+
+        <!-- Footer -->
+        <footer class="footer bg-color" data-bg-color="#f4f8fa">
+
+            <!-- Footer >>> top -->
+            <div class="footer-top">
+                <div class="container-fluid">
+                    <div class="row border-bottom pt--70 pb--70">
+
+                        <!-- Logo + Text -->
+                        <div class="col-lg-3 col-sm-6 offset-md-1 offset-lg-0 mb-md--45">
+                            <div class="footer-widget">
+                                <div class="textwidget">
+                                    <figure class="footer-logo mb--30">
+                                        <img src="{% static 'main/img/logos/ho-logo-0.png' %}" style="width: 70px; height: 108px;" alt="Logo">
+                                    </figure>
+                                    <p style="text-align: justify; color: black; margin-left: 2em;">جنگل آشفته نیاز به نگهبان دارد. هومبابا نگهبانی است که در جنگل آشفته بازار املاک در کنار شما و مشغول حفاظت خواهد بود.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Links1 -->
+                        <div class="col-lg-2 col-sm-3 offset-lg-1 offset-sm-2 mb-md--45 offse ">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20" style="font-size: 1.1em;">{% trans 'Hombaba' %}</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <li><a href="{% url 'contact' %}" style="font-size: 0.9em;">{% trans 'Contact Us' %}</a></li>
+                                        <li><a href="{% url 'about' %}" style="font-size: 0.9em;">{% trans 'About Us' %}</a></li>
+                                        <li><a href="{% url 'blog_list' %}" style="font-size: 0.9em;">{% trans 'Hombaba Blog' %}</a></li>
+                                        <li><a href="{% url 'rules' %}" style="font-size: 0.9em;">{% trans 'Rules' %}</a></li>
+                                        <li><a href="{% url 'faq' %}" style="font-size: 0.9em;">{% trans 'FAQ' %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Links2 -->
+                        <div class="col-lg-2 col-sm-4 offset-md-1 offset-lg-0 mb-xs--45">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20" style="font-size: 1.1em;">{% trans 'Products' %}</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <li><a href="{% url 'counseling' %}" style="font-size: 0.9em;">{% trans 'Counseling' %}</a></li>
+                                        <li><a href="{% url 'session' %}" style="font-size: 0.9em;">{% trans 'Participation in Session' %}</a></li>
+                                        <li><a href="{% url 'visit' %}" style="font-size: 0.9em;">{% trans 'Participation in Visit' %}</a></li>
+                                        <li><a href="{% url 'sale_file_list' %}" style="font-size: 0.9em;">{% trans 'Sale Files' %}</a></li>
+                                        <li><a href="{% url 'rent_file_list' %}" style="font-size: 0.9em;">{% trans 'Rent Files' %}</a></li>
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em;">{% trans 'Investment Opportunities' %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Links3 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20" style="font-size: 1.1em;">{% trans 'Hombaba Socials' %}</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em;">{% trans 'Instagram' %}</a></li>
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em;">{% trans 'LinkedIn' %}</a></li>
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em;">{% trans 'Youtube' %}</a></li>
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em;">{% trans 'Aparat' %}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Links4 -->
+                        <div class="col-lg-2 col-md-3 col-sm-4">
+                            <div class="footer-widget">
+                                <h3 class="widget-title mb--35 mb-sm--20" style="font-size: 1.1em;">{% trans 'Important Links' %}</h3>
+                                <div class="footer-widget">
+                                    <ul class="footer-menu">
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Course' %}</a></li>
+                                        <li><a href="{% url 'home' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Register as Consultant' %}</a></li>
+                                        {% if user.is_authenticated %}
+                                            <li><a href="{% url 'sale_file_create' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Register Sale File' %}</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'registration' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Register Sale File' %}</a></li>
+                                        {% endif %}
+                                        {% if user.is_authenticated %}
+                                            <li><a href="{% url 'rent_file_create' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Register Rent File' %}</a></li>
+                                        {% else %}
+                                            <li><a href="{% url 'registration' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Register Rent File' %}</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer >>> DESIGNER -->
+            <div class="footer-bottom">
+                <div class="container-fluid">
+                    <div class="row border-top ptb--20">
+                        <div class="col-12 text-center">
+                            <p class="copyright-text">تمامی حقوق متعلق به هومبابا است - طراحی شده توسط هومساز</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- end: Footer -->
+
+
+        <!-- Hamburger menu -->
+        <div class="offcanvas-menu-wrapper" id="offcanvasMenu">
+            <div class="offcanvas-menu-inner">
+                <a href="" class="btn-close" style="left: 11px;"><span>x</span></a>
+
+                <nav class="offcanvas-navigation">
+                    <ul class="offcanvas-menu">
+
+                        <li class="menu-item-has-children">
+                            <a href="#" style="color: #00A65C;">{% trans 'Services' %}</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'counseling' %}">{% trans 'Counseling' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'session' %}">{% trans 'Participation in Session' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'visit' %}">{% trans 'Participation in Visit' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'case_list' %}">{% trans 'Investment Opportunities' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#" style="color: #00A65C">{% trans 'Course' %}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item-has-children">
+                            <a href="{% url 'home' %}">{% trans 'Files' %}</a>
+                            <ul class="sub-menu">
+
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'trade_session' %}">
+                                        <span class="mm-text">{% trans 'Do Trade' %}</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'sale_file_create' %}">
+                                            <span class="mm-text">{% trans 'Sale File Submit' %}</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'registration' %}">
+                                            <span class="mm-text">{% trans 'Sale File Submit' %}</span>
+                                        </a>
+                                    {% endif %}
+                                </li>
+                                <li class="menu-item-has-children">
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'rent_file_create' %}">
+                                            <span class="mm-text">{% trans 'Rent File Submit' %}</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'registration' %}">
+                                            <span class="mm-text">{% trans 'Rent File Submit' %}</span>
+                                        </a>
+                                    {% endif %}
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'sale_file_list' %}">{% trans 'Sale Files' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'rent_file_list' %}">{% trans 'Rent Files' %}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item-has-children">
+                            <a href="#">{% trans 'Links' %}</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'blog_list' %}">
+                                        <span class="mm-text">{% trans 'Hombaba Blog' %}</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'contact' %}">{% trans 'Contact Us' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'about' %}">{% trans 'About Us' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'rules' %}">{% trans 'Rules' %}</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="{% url 'faq' %}">{% trans 'FAQ' %}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item-has-children">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'profile_info_now' %}">{% trans 'User Dashboard' %}</a>
+                            {% else %}
+                                <a href="{% url 'registration' %}">{% trans 'Login / Signup' %}</a>
+                            {% endif %}
+                        </li>
+
+                        <li class="menu-item-has-children active">
+                            <a href="127.0.0.1:8000/admin/" style="color: #00A65C">پنل ادمین</a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+        <!-- end: Hamburger menu -->
+
+    </div>
+    <!-- end: Main -->
+
+
+    <!-- JS -->
+    <script src="{% static 'main/js/vendor-1.js' %}"></script>
+    <script src="{% static 'main/js/main-1.js' %}"></script>
+    <script src="{% static 'main/js/reply-buttons.js' %}"></script>
+    <script src="{% static 'main/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'main/js/popper.min.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <!-- for Messages -->
+    <script>
+        $(document).ready(function() {
+            $('#messageModal').modal('show');
+        });
+    </script>
+    <!-- end: JS -->
+</body>
+
+</html>
+
+

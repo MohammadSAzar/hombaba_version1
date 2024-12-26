@@ -1,0 +1,163 @@
+{% extends '_base_profile.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans 'My Services' %}{% endblock %}
+
+
+{% block two_buttons %}
+    <div class="nk-content" style="padding: 0;!important;">
+        <div class="container-fluid">
+            <div class="nk-content-inner">
+                <div class="nk-content-body" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                    <div class="nk-block-head nk-block-head-sm" style="padding-top: 0;!important; padding-bottom: 0;!important;">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <ul class="nk-block-tools g-3" style="margin-bottom: 2px;!important;">
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'sale_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی فروش</span></a>
+                                    </li>
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'rent_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی اجاره</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card rounded-12 shadow-dark-80">
+
+                    <!-- Top ribbon -->
+                    <div class="d-flex align-items-center px-3 px-md-4 py-3">
+
+                        <!-- Title -->
+                        <h5 class="card-header-title mb-0 ps-md-2 font-weight-semibold">{% trans 'Counselings' %}</h5>
+
+                    </div>
+
+                    <!-- Main >>> counselings -->
+                    <div class="table-responsive mb-0">
+                        <table class="table card-table table-nowrap overflow-hidden">
+
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 5%">{% trans 'Row' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Date' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Name' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Type' %}</th>
+                                    <th style="text-align: center; width: 20%">{% trans 'Status' %}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="list">
+                                {% for counseling in counselings %}
+                                    <tr>
+                                        <td style="text-align: center; width: 5%">{{ forloop.counter }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.get_date_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.get_counseling_type_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ counseling.get_status_display }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                      </table>
+                    </div>
+
+                    <!--------------------------------------------------------------------------------------------->
+
+                    <!-- Top ribbon -->
+                    <div class="d-flex align-items-center px-3 px-md-4 py-3" style="margin-top: 60px;!important;">
+
+                        <!-- Title -->
+                        <h5 class="card-header-title mb-0 ps-md-2 font-weight-semibold">{% trans 'Sessions' %}</h5>
+
+                    </div>
+
+                    <!-- Main >>> sessions -->
+                    <div class="table-responsive mb-0">
+                        <table class="table card-table table-nowrap overflow-hidden">
+
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 5%">{% trans 'Row' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Date' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Name' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Type' %}</th>
+                                    <th style="text-align: center; width: 20%">{% trans 'Status' %}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="list">
+                                {% for session in sessions %}
+                                    <tr>
+                                        <td style="text-align: center; width: 5%">{{ forloop.counter }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.get_date_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.get_customer_type_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ session.get_status_display }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                      </table>
+                    </div>
+
+                    <!--------------------------------------------------------------------------------------------->
+
+                    <!-- Top ribbon -->
+                    <div class="d-flex align-items-center px-3 px-md-4 py-3" style="margin-top: 60px;!important;">
+
+                        <!-- Title -->
+                        <h5 class="card-header-title mb-0 ps-md-2 font-weight-semibold">{% trans 'Visits' %}</h5>
+
+                    </div>
+
+                    <!-- Main >>> visits -->
+                    <div class="table-responsive mb-0">
+                        <table class="table card-table table-nowrap overflow-hidden">
+
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center; width: 5%">{% trans 'Row' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Date' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'Name' %}</th>
+                                    <th style="text-align: center; width: 25%">{% trans 'City' %}</th>
+                                    <th style="text-align: center; width: 20%">{% trans 'Status' %}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="list">
+                                {% for visit in visits %}
+                                    <tr>
+                                        <td style="text-align: center; width: 5%">{{ forloop.counter }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.get_date_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.get_city_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ visit.get_status_display }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                      </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

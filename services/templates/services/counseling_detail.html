@@ -1,0 +1,170 @@
+{% extends '_base_services.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% load jalali_tags %}
+{% load number_converter %}
+{% load widget_tweaks %}
+
+
+{% block title %}{% trans 'Counseling detail' %}{% endblock %}
+
+{% block content %}
+
+    <main class="flex-grow bg-secondary-light pb-14 pt-36 dark:bg-primary-dark xs:pt-36">
+        <div class="container pb-14">
+            <div class="grid grid-cols-12 gap-2 lg:gap-6">
+
+                <!-- top ribbon -->
+                <div class="col-span-12 rounded-lg bg-primary-light dark:bg-secondary-dark">
+                    <ol class="grid grid-cols-2 overflow-hidden rounded-lg">
+                        <li class="flex flex-col items-center justify-center gap-2 p-4 text-xs text-tertiary-500 opacity-50 dark:text-tertiary-400 sm:text-sm md:text-base" style="background-color: #fefeff">
+                            <p class="leading-none" style="font-size: 1.2em; color: #00a65c">{% trans 'Submit a counseling request' %}</p>
+                        </li>
+                        <li class="flex flex-col items-center justify-center gap-2 bg-tertiary-500/10 p-4 text-xs text-tertiary-500 dark:bg-tertiary-400/10 dark:text-tertiary-400 sm:text-sm md:text-base" style="background-color: #00A65C;">
+                            <p class="leading-none" style="font-size: 1.2em; color: #fefeff">{% trans 'Detail of counseling request' %}</p>
+                        </li>
+                  </ol>
+                </div>
+                <!-- end: top ribbon -->
+
+                <!-- Counseling detail -->
+                 <div class="col-span-12 md:col-span-8">
+                    <div class="rounded-lg bg-primary-light p-4 dark:bg-secondary-dark">
+                        <div class="col-span-6 md:col-span-4">
+                            <div class="rounded-lg bg-primary-light p-4 dark:bg-secondary-dark md:block">
+                                <div class="mb-2 divide-y divide-secondary-light dark:divide-primary-light/5">
+
+                                    <!-- counseling type -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Counseling type' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.get_counseling_type_display }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- customer type -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Customer type' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.get_customer_type_display }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- date -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Counseling date' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.get_date_display }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- time -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Counseling time' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.get_time_display }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- name & family -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Name & Family' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.name_and_family }}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <!-- end: Counseling detail -->
+
+                <!-- Counseling payment -->
+                 <div class="col-span-12 md:col-span-4">
+                    <div class="rounded-lg bg-primary-light p-4 dark:bg-secondary-dark">
+                        <div class="col-span-6 md:col-span-4">
+
+                            <!-- Desktop -->
+                            <div class="hidden rounded-lg bg-primary-light p-4 dark:bg-secondary-dark md:block">
+                                <div class="mb-2 divide-y divide-secondary-light dark:divide-primary-light/5">
+
+                                    <!-- price -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Cost of counseling' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.price|intcomma:False|farsi_number }}</span>
+                                            <span class="text-xs lg:text-sm">{% trans 'Tooman' %}</span>
+                                        </div>
+                                    </div>
+                                    <!-- end: price -->
+
+                                    <!-- Tax -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Tax' %}</div>
+                                        <div class="text-sm font-medium text-red-500 dark:text-red-400 lg:text-base">
+                                            <span class="font-bold" style="color: rgb(16 185 129 / var(--tw-text-opacity))">{{ counseling.tax|intcomma:False|farsi_number }}</span>
+                                            <span class="text-xs lg:text-sm" style="color: rgb(16 185 129 / var(--tw-text-opacity))">{% trans 'Tooman' %}</span>
+                                        </div>
+                                    </div>
+                                    <!-- end: Tax -->
+
+                                    <!-- price + tax -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Total price' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ counseling.price_plus_tax|intcomma:False|farsi_number }}</span>
+                                            <span class="text-xs lg:text-sm">{% trans 'Tooman' %}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end: price + tax -->
+
+                                <div><a href="{% url 'home' %}" class="btn-primary py-3">{% trans 'Go to payment page' %}</a></div>
+                            </div>
+
+                            <!-- Mobile -->
+                            <div class="inset-x-0 bottom-0 items-center gap-x-6 rounded-t-2xl bg-primary-light p-4 dark:bg-secondary-dark md:hidden">
+                                <div class="flex flex-col gap-y-1">
+
+                                    <!-- price -->
+                                    <div class="text-sm text-quaternary-500 dark:text-quaternary-400" style="margin-bottom: 1.2em">
+                                        <div style="float: right"><span class="font-bold">{% trans 'Cost of counseling' %}</span></div>
+                                        <div style="float: left;"><span class="font-bold" style="color: rgb(16 185 129 / var(--tw-text-opacity))">{{ counseling.price|intcomma:False|farsi_number }} {% trans 'Tooman' %}</span></div>
+                                    </div>
+                                    <!-- end: price -->
+
+                                    <!-- tax -->
+                                    <div class="text-sm text-quaternary-500 dark:text-quaternary-400" style="margin-bottom: 1.2em">
+                                        <div style="float: right"><span class="font-bold">{% trans 'Tax' %}</span></div>
+                                        <div style="float: left"><span class="font-bold" style="color: rgb(16 185 129 / var(--tw-text-opacity))">{{ counseling.tax|intcomma:False|farsi_number }} {% trans 'Tooman' %}</span></div>
+                                    </div>
+                                    <!-- end: tax -->
+
+                                    <!-- price + tax -->
+                                    <div class="text-sm text-quaternary-500 dark:text-quaternary-400" style="margin-bottom: 1.2em">
+                                        <div style="float: right"><span class="font-bold">{% trans 'Total price' %}</span></div>
+                                        <div style="float: left"><span class="font-bold" style="color: rgb(16 185 129 / var(--tw-text-opacity))">{{ counseling.price_plus_tax|intcomma:False|farsi_number }} {% trans 'Tooman' %}</span></div>
+                                    </div>
+                                    <!-- end: price + tax -->
+
+                                </div>
+                                <a class="btn-primary flex-grow py-3" href="{% url 'home' %}">{% trans 'Go to payment page' %}</a>
+                            </div>
+
+                        </div>
+                    </div>
+                 </div>
+                <!-- end: Counseling payment  -->
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+
+
+
+
+
