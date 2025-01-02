@@ -60,6 +60,7 @@
 
                                     <!-- Sidebar >>> menu >>> items -->
                                     <ul class="nk-menu">
+
                                         <!-- Info -->
                                         <li class="nk-menu-item has-sub">
                                             <a href="#" class="nk-menu-link nk-menu-toggle">
@@ -83,36 +84,11 @@
                                         <li class="nk-menu-item has-sub">
                                             <a href="#" class="nk-menu-link nk-menu-toggle">
                                                 <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                                <span class="nk-menu-text">{% trans 'Received Services (Normal user)' %}</span>
+                                                <span class="nk-menu-text">{% trans 'Activities History' %}</span>
                                             </a>
                                             <ul class="nk-menu-sub">
                                                 <li class="nk-menu-item">
-                                                    <a href="{% url 'profile_your_services' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'My Services' %}</span></a>
-                                                </li>
-                                                <li class="nk-menu-item">
-                                                    <a href="{% url 'profile_your_trades' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'My Trades' %}</span></a>
-                                                </li>
-                                                <li class="nk-menu-item">
-                                                    <a href="{% url 'profile_your_cases' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'My Investments' %}</span></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <!-- Agent -->
-                                        <li class="nk-menu-item has-sub">
-                                            <a href="#" class="nk-menu-link nk-menu-toggle">
-                                                <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                                <span class="nk-menu-text">{% trans 'Agent Users' %}</span>
-                                            </a>
-                                            <ul class="nk-menu-sub">
-                                                <li class="nk-menu-item">
-                                                    <a href="{% url 'agent_request' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'Submit Request' %}</span></a>
-                                                </li>
-                                                <li class="nk-menu-item">
-                                                    <a href="{% url 'agent_task_list' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'Tasks List' %}</span></a>
-                                                </li>
-                                                <li class="nk-menu-item">
-                                                    <a href="{% url 'agent_activities' %}" class="nk-menu-link"><span class="nk-menu-text">{% trans 'Activities' %}</span></a>
+                                                    <a href="#" class="nk-menu-link"><span class="nk-menu-text">{% trans 'Received Services' %}</span></a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -132,7 +108,7 @@
                 <!-- Header & Content -->
                 <div class="nk-wrap">
 
-                    <!-- File create message -->
+                    <!-- Message -->
                     <div id="successModal" class="modal">
                         <div class="modal-content">
                             <h4 class="modal-title" style="padding: 20px 20px 10px 0;!important;">عملیات با موفقیت انجام شد.</h4>
@@ -153,7 +129,7 @@
                             });
                         });
                     </script>
-                    <!-- end: File create message -->
+                    <!-- end: Message -->
 
                     <!-- Header -->
                     <div class="nk-header nk-header-fixed is-light">
@@ -212,11 +188,11 @@
                     <div class="nk-content nk-content-fluid">
                         <div class="container-xl wide-lg">
 
-                            <!-- File & Rent buttons -->
+                            <!-- Buttons -->
                             {% block two_buttons %}
 
                             {% endblock %}
-                            <!-- end: File & Rent buttons -->
+                            <!-- end: Buttons -->
 
                             <!-- Main content -->
                             <div class="nk-content-body">

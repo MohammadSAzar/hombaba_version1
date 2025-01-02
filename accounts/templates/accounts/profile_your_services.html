@@ -19,10 +19,19 @@
                             <div class="nk-block-head-content">
                                 <ul class="nk-block-tools g-3" style="margin-bottom: 2px;!important;">
                                     <li class="nk-block-tools-opt">
-                                        <a href="{% url 'sale_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی فروش</span></a>
+                                        <a href="{% url 'counseling' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Counseling' %}</span>
+                                        </a>
                                     </li>
                                     <li class="nk-block-tools-opt">
-                                        <a href="{% url 'rent_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی اجاره</span></a>
+                                        <a href="{% url 'session' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Participation in Session' %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'visit' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Participation in Visit' %}</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -39,7 +48,8 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="card rounded-12 shadow-dark-80">
-
+                    <!--------------------------------------------------------------------------------------------->
+                
                     <!-- Top ribbon -->
                     <div class="d-flex align-items-center px-3 px-md-4 py-3">
 
@@ -69,7 +79,7 @@
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.get_date_display }}</td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ counseling.get_counseling_type_display }}</td>
-                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ counseling.get_status_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ counseling.counseling_task.get_status_display }}</td>
                                     </tr>
                                 {% endfor %}
 
@@ -108,7 +118,7 @@
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.get_date_display }}</td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ session.get_customer_type_display }}</td>
-                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ session.get_status_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ session.session_task.get_status_display }}</td>
                                     </tr>
                                 {% endfor %}
 
@@ -147,7 +157,7 @@
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.get_date_display }}</td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.name_and_family }}<span class="badge bg-teal-50 text-teal-500"></span></td>
                                         <td style="font-size: 0.9em; text-align: center; width: 25%">{{ visit.get_city_display }}</td>
-                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ visit.get_status_display }}</td>
+                                        <td style="font-size: 0.9em; text-align: center; width: 20%">{{ visit.visit_task.get_status_display }}</td>
                                     </tr>
                                 {% endfor %}
 

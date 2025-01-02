@@ -10,7 +10,7 @@
 
 
 {% block two_buttons %}
-    <div class="nk-content " style="padding: 0;!important;">
+    <div class="nk-content" style="padding: 0;!important;">
         <div class="container-fluid">
             <div class="nk-content-inner">
                 <div class="nk-content-body" style="padding-top: 0;!important; padding-bottom: 0;!important;">
@@ -19,10 +19,19 @@
                             <div class="nk-block-head-content">
                                 <ul class="nk-block-tools g-3" style="margin-bottom: 2px;!important;">
                                     <li class="nk-block-tools-opt">
-                                        <a href="{% url 'sale_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی فروش</span></a>
+                                        <a href="{% url 'counseling' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Counseling' %}</span>
+                                        </a>
                                     </li>
                                     <li class="nk-block-tools-opt">
-                                        <a href="{% url 'rent_file_create' %}" class="btn btn-primary" style="line-height: 2.5em;!important;"><em class="icon ni ni-plus"></em><span>ثبت آگهی اجاره</span></a>
+                                        <a href="{% url 'session' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Participation in Session' %}</span>
+                                        </a>
+                                    </li>
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'visit' %}" class="btn btn-primary" style="line-height: 2.5em;!important;">
+                                            <span>{% trans 'Participation in Visit' %}</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -45,16 +54,12 @@
                     <div class="card-inner card-inner-lg">
                         <div class="col-12 col-xl-12 col-xxl-12">
                             <div class="card rounded-12 shadow-dark-80 border border-gray-50 mb-3 mb-xl-5">
-
-                                <div class="d-flex align-items-center px-3 px-md-4 py-3 border-bottom border-gray-200" style="text-align: center;!important; justify-content: center; justify-items: center;">
-                                    <span>تنها در صورتی که قصد استفاده از فرصت‌های سرمایه‌گذاری هومبابا یا همکاری به عنوان مشاور با ما را دارید، نیاز به تایید حساب کاربری خود دارید.</span>
-                                </div>
-
                                 <div class="card-body px-0 p-md-4">
 
                                     <form method="post" class="px-3 form-style-two" enctype="multipart/form-data" novalidate>
                                         {% csrf_token %}
                                         <div class="row">
+                                        
                                             <!-- First Name -->
                                             <div class="col-sm-6 mb-md-4 pb-3">
                                                 <label for="{{ form.f_name.id_for_label }}" class="form-label form-label-lg">{% trans 'First Name' %}</label>
@@ -120,68 +125,13 @@
                                                     {% endfor %}
                                                 {% endif %}
                                             </div>
-
-                                            <!-- Postal Code -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
-                                                <label for="{{ form.postal_code.id_for_label }}" class="form-label form-label-lg">{% trans 'Postal Code' %}</label>
-                                                {% render_field form.postal_code type="number" id="postal_code" class="form-control form-control-xl" %}
-                                                {% if form.postal_code.errors %}
-                                                    {% for error in form.postal_code.errors %}
-                                                        <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-
+                                        
                                             <!-- Email -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
+                                            <div class="col-sm-12 mb-md-4 pb-3">
                                                 <label for="{{ form.email.id_for_label }}" class="form-label form-label-lg">{% trans 'Email' %}</label>
                                                 {% render_field form.email type="email" id="email" class="form-control form-control-xl" %}
                                                 {% if form.email.errors %}
                                                     {% for error in form.email.errors %}
-                                                        <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-
-                                            <!-- National Card -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
-                                                <label for="{{ form.national_card.id_for_label }}" class="form-label form-label-lg">{% trans 'National Card' %}</label>
-                                                {% render_field form.national_card type="file" id="national_card" accept="image/*" class="form-control form-control-xl" %}
-                                                {% if form.national_card.errors %}
-                                                    {% for error in form.national_card.errors %}
-                                                        <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-
-                                            <!-- Authentication Picture -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
-                                                <label for="{{ form.auth_picture.id_for_label }}" class="form-label form-label-lg">{% trans 'Authentication Picture' %}</label>
-                                                {% render_field form.auth_picture type="file" id="auth_picture" class="form-control form-control-xl" %}
-                                                {% if form.auth_picture.errors %}
-                                                    {% for error in form.auth_picture.errors %}
-                                                        <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-
-                                            <!-- Bank Card -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
-                                                <label for="{{ form.bank_card.id_for_label }}" class="form-label form-label-lg">{% trans 'Bank Card' %}</label>
-                                                {% render_field form.bank_card type="file" id="bank_card" class="form-control form-control-xl" %}
-                                                {% if form.bank_card.errors %}
-                                                    {% for error in form.bank_card.errors %}
-                                                        <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-
-                                            <!-- Bank Sheba -->
-                                            <div class="col-sm-6 mb-md-4 pb-3">
-                                                <label for="{{ form.bank_sheba.id_for_label }}" class="form-label form-label-lg">{% trans 'Bank Sheba' %}</label>
-                                                {% render_field form.bank_sheba type="text" id="bank_sheba" class="form-control form-control-xl" %}
-                                                {% if form.bank_sheba.errors %}
-                                                    {% for error in form.bank_sheba.errors %}
                                                         <p style="color: red; margin-top: 0.8em; font-size: 0.9em;">{{ error }}</p>
                                                     {% endfor %}
                                                 {% endif %}

@@ -60,6 +60,7 @@
         </section>
         <!-- end: Banner -->
 
+
         <!-- Hombaba services -->
         <section class="banner-area mb--75  mb-md--55">
             <div class="container">
@@ -73,30 +74,6 @@
 
                 <!-- Services -->
                 <div class="row" style="margin-right: 0">
-
-                    <!-- Files -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/shopping_files_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'home' %}" class="banner__link"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cases -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/money_cases_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'home' %}" class="banner__link"></a>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Counseling -->
                     <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
@@ -151,6 +128,7 @@
         </section>
         <!-- end: Hombaba services -->
 
+
         <!-- Hombaba tasks -->
         <section class="blog-area mb--70 mb-md--50">
             <div class="container">
@@ -175,6 +153,7 @@
 
                                       <div class="text-center">
                                           <div class="circle circle-xl mx-auto">
+
                                               <!-- Title -->
                                               <div style="height: 4.5em; -webkit-line-clamp: 2;">
                                                   <!-- Services title -->
@@ -196,17 +175,6 @@
                                                               {{ task.get_type_display }} {{ task.task_counseling.get_counseling_type_display }} | {{ task.task_counseling.get_date_display }} | {{ task.task_counseling.get_time_display }}
                                                           </h3></a>
                                                       {% endif %}
-                                                      <!-- trade session title -->
-                                                  {% elif task.type == 'tds' %}
-                                                      {% if task.task_trade_session.location == 'ours' %}
-                                                          <a href="{{ task.get_absolute_url }}"><h3 style="line-height: 1.5em;!important;" class="font-weight-semibold title-box">
-                                                              {{ task.get_type_display }} {% trans 'in hombaba (tehran)' %} | {{ task.task_trade_session.get_date_display }} | {{ task.task_trade_session.get_time_display }}
-                                                          </h3></a>
-                                                      {% else %}
-                                                          <a href="{{ task.get_absolute_url }}"><h3 style="line-height: 1.5em;!important;" class="font-weight-semibold title-box">
-                                                              {{ task.get_type_display }} {% trans 'in' %} {{ task.task_trade_session.get_city_display }} - {{ task.task_trade_session.district }}  | {{ task.task_trade_session.get_date_display }} | {{ task.task_trade_session.get_time_display }}
-                                                          </h3></a>
-                                                      {% endif %}
                                                   {% endif %}
                                               </div>
 
@@ -216,7 +184,7 @@
                                                   {% if task.type == 'cns' %}
                                                       <p class="font-weight-semibold title-box">{% trans 'Total price: ' %}</p>
                                                       <h3 style="color: #00a65c;">{{ task.task_counseling.price|intcomma:False|farsi_number }} {% trans 'Tooman' %}</h3>
-                                                  <!-- Counseling -->
+                                                  <!-- Session -->
                                                   {% elif task.type == 'ses' %}
                                                       <p class="font-weight-semibold title-box">{% trans 'Total price: ' %}</p>
                                                       <h3 style="color: #00a65c;">{{ task.task_session.price|intcomma:False|farsi_number }} {% trans 'Tooman' %}</h3>
@@ -224,27 +192,23 @@
                                                   {% elif task.type == 'vis' %}
                                                       <p class="font-weight-semibold title-box">{% trans 'Total price: ' %}</p>
                                                       <h3 style="color: #00a65c;">{{ task.task_visit.price|intcomma:False|farsi_number }} {% trans 'Tooman' %}</h3>
-                                                  <!-- TS -->
-                                                  {% elif task.type == 'tds' %}
-                                                      <p class="font-weight-semibold title-box">{% trans 'Total price: ' %}</p>
-                                                      <h3 style="color: #00a65c;">0/25 درصد مبلغ معامله</h3>
                                                   {% endif %}
                                               </div>
 
-                                              <!-- Request status -->
+                                              <!-- Status -->
                                               <div class="pt-4 pb-4" style="margin-bottom: 15px;">
-                                                  {% if task.is_requested == 'fre' %}
-                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_is_requested_display }}</span>
+                                                  {% if task.status == 'fre' %}
+                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_status_display }}</span>
                                                       <div class="progress rounded-pill" style="height: 5px;width: 100%;">
                                                           <div class="progress-bar bg-teal-500" role="progressbar" style="width: 33%; background-color: #00A65C;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
                                                       </div>
-                                                  {% elif task.is_requested == 'pen' %}
-                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_is_requested_display }}</span>
+                                                  {% elif task.status == 'pen' %}
+                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_status_display }}</span>
                                                       <div class="progress rounded-pill" style="height: 5px;width: 100%;">
                                                           <div class="progress-bar bg-teal-500" role="progressbar" style="width: 66%; background-color: #FFA726;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                                                       </div>
-                                                  {% elif task.is_requested == 'tkn' %}
-                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_is_requested_display }}</span>
+                                                  {% elif task.status == 'tkn' %}
+                                                      <span class="small font-weight-semibold mb-2 d-block">{{ task.get_status_display }}</span>
                                                       <div class="progress rounded-pill" style="height: 5px;width: 100%;">
                                                             <div class="progress-bar bg-teal-500" role="progressbar" style="width: 99%; background-color: grey" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
                                                       </div>
@@ -259,7 +223,7 @@
                      </div>
 
                     <div class="text-center" style="margin-top: 20px;">
-                        <a href="{% url 'home' %}" class="btn btn-primary" style="padding: 5px 45px; line-height: 2.5em;!important; border: #00A65C solid 1px;">برای مشاهده تمام فرصت‌های کاری، کلیک نمایید</a>
+                        <a href="{% url 'home' %}" class="btn btn-primary" style="padding: 5px 45px; line-height: 2.5em;!important; border: #00A65C solid 1px;">برای مشاهده تمام موارد، کلیک نمایید</a>
                     </div>
                 </div>
                 <!-- end: Hombaba tasks -->
@@ -267,6 +231,7 @@
             </div>
         </section>
         <!-- end: Tasks -->
+
 
         <!-- Hombaba blogs -->
         <section class="blog-area mb--70 mb-md--50">
