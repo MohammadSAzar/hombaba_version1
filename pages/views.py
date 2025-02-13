@@ -13,8 +13,8 @@ def home_view(request):
     return render(request, 'pages/home.html', context)
 
 
-def four_o_four_view(request):
-    return render(request, 'pages/404.html')
+# def four_o_four_view(request):
+#     return render(request, 'pages/404.html')
 
 
 def contact_view(request):

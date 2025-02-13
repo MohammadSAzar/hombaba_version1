@@ -65,9 +65,9 @@ class BlogDetailView(DetailView):
         return HttpResponseRedirect(reverse('blog_detail', args=[self.kwargs['slug']]))
 
 
-# ************************************** Blog category views ************************************** #
+# ************************************* Blog category views ************************************* #
 def blog_category_hombaba(request):
-    blogs = Blog.objects.select_related('blog_category').filter(status='pub').filter(blog_category__title='هومبیا')
+    blogs = Blog.objects.select_related('blog_category').filter(status='pub').filter(blog_category__title='هومبابا')
     context = {
         'blogs': blogs,
     }

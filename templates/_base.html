@@ -74,7 +74,7 @@
 
                                                 <!-- services -->
                                                 <li class="mainmenu__item menu-item-has-children">
-                                                    <a href="#" class="mainmenu__link"><span class="mm-text" style="font-weight: bold;">{% trans 'Servics' %}</span></a>
+                                                    <a href="#" class="mainmenu__link"><span class="mm-text" style="font-weight: bold;">{% trans 'Services' %}</span></a>
                                                     <ul class="sub-menu">
                                                         <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'counseling' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Counseling' %}</span></a></li>
                                                         <li class="menu-item-has-children" style="margin-bottom: 1em;"><a href="{% url 'session' %}"><span class="mm-text" style="font-weight: bold;">{% trans 'Participation in Session' %}</span></a></li>
@@ -102,7 +102,7 @@
 
                                                 <!-- course -->
                                                 <li class="mainmenu__item menu-item-has-children">
-                                                    <a href="http://127.0.0.1:8000/admin/" class="mainmenu__link">
+                                                    <a href="{% url 'home' %}" class="mainmenu__link">
                                                         <span class="mm-text" style="font-weight: bold;">{% trans 'Course' %}</span>
                                                     </a>
                                                 </li>
@@ -176,7 +176,7 @@
 
 
         <!-- Footer -->
-        <footer class="footer bg-color" data-bg-color="#f4f8fa">
+        <footer class="footer bg-color" data-bg-color="#f4f8fa" >
 
             <!-- Footer >>> top -->
             <div class="footer-top">
@@ -241,7 +241,7 @@
                         </div>
 
                         <!-- Links4 -->
-                        <div class="col-lg-2 col-md-3 col-sm-4">
+                        <div class="col-lg-2 col-md-3 col-sm-4" style="margin-top: 3em;">
                             <div class="footer-widget">
                                 <h3 class="widget-title mb--35 mb-sm--20" style="font-size: 1.1em;">{% trans 'Important Links' %}</h3>
                                 <div class="footer-widget">
@@ -250,7 +250,7 @@
                                         {% if user.is_authenticated %}
                                             <li><a href="{% url 'profile_info_now' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Dashboard' %}</a></li>
                                         {% else %}
-                                            <li><a href="{% url 'registration' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Registeration' %}</a></li>
+                                            <li><a href="{% url 'registration' %}" style="font-size: 0.9em; border-bottom: 1px solid #00a65c; color: #00a65c; font-weight: bolder">{% trans 'Registration' %}</a></li>
                                         {% endif %}
                                     </ul>
                                 </div>
@@ -331,7 +331,7 @@
 
                         <!-- course -->
                         <li class="menu-item-has-children">
-                            <a href="#">{% trans 'Course' %}</a>
+                            <a href="{% url 'home' %}">{% trans 'Course' %}</a>
                         </li>
 
                     </ul>

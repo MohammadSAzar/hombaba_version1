@@ -1,5 +1,7 @@
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -12,6 +14,11 @@ from .checkers import send_otp, get_random_otp, otp_time_checker
 from services.models import Counseling, Session, Visit
 
 
+# def not_logged_in(user):
+#     return not user.is_authenticated
+
+
+# @user_passes_test(not_logged_in, login_url='/verification')
 def registration_view(request):
     form = RegistrationForm
     if request.method == 'POST':
@@ -42,9 +49,12 @@ def registration_view(request):
     context = {
         'form': form,
     }
+    if request.user.is_authenticated:
+        raise PermissionDenied
     return render(request, 'accounts/registration.html', context)
 
 
+# @user_passes_test(not_logged_in, login_url='/profile_info_now')
 def verification_view(request):
     try:
         phone_number = request.session.get('user_phone_number')
@@ -59,12 +69,15 @@ def verification_view(request):
         context = {
             'phone_number': phone_number,
         }
+        if request.user.is_authenticated:
+            raise PermissionDenied
         return render(request, 'accounts/verification.html', context)
     except CustomUserModel.DoesNotExist:
         return HttpResponseRedirect(reverse('registration'))
 
 
 # --------------------------------- Profile ---------------------------------
+# @login_required(login_url='/login')
 def profile_info_now_view(request):
     context = {}
     phone_number = request.session.get('user_phone_number')
@@ -74,9 +87,12 @@ def profile_info_now_view(request):
     else:
         user = request.user
         context['user'] = user
+    if not request.user.is_authenticated:
+        raise PermissionDenied
     return render(request, 'accounts/profile_info_now.html', context)
 
 
+# @login_required(login_url='/login')
 def profile_info_auth_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request.POST, request.FILES)
@@ -96,9 +112,12 @@ def profile_info_auth_view(request):
     context = {
         'form': form,
     }
+    if not request.user.is_authenticated:
+        raise PermissionDenied
     return render(request, 'accounts/profile_info_auth.html', context)
 
 
+# @login_required(login_url='/login')
 def profile_info_edit_view(request):
     if request.method == 'POST':
         form = InfoEditForm(request.POST)
@@ -114,9 +133,12 @@ def profile_info_edit_view(request):
     context = {
         'form': form,
     }
+    if not request.user.is_authenticated:
+        raise PermissionDenied
     return render(request, 'accounts/profile_info_edit.html', context)
 
 
+# @login_required(login_url='/login')
 def profile_your_services_view(request):
     phone_number = request.session.get('user_phone_number')
     counselings = Counseling.objects.filter(phone_number=phone_number).all()
@@ -127,6 +149,8 @@ def profile_your_services_view(request):
         'sessions': sessions,
         'visits': visits,
     }
+    if not request.user.is_authenticated:
+        raise PermissionDenied
     return render(request, 'accounts/profile_your_services.html', context)
 
 

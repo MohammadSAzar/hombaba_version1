@@ -11,7 +11,7 @@
 {% block content %}
 
         <!-- Banner -->
-        <section class="homepage-slider mb--75 mb-md--55" style="direction: ltr">
+        <section class="homepage-slider mb--75 mb-md--55"  style="direction: ltr">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -73,56 +73,58 @@
                 </div>
 
                 <!-- Services -->
-                <div class="row" style="margin-right: 0">
+                <div class="pb-2 pb-xl-5 mb-2 mb-xl-5 pt-3">
+                    <div class="row" style="margin-right: 0">
 
-                    <!-- Counseling -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/help_counseling_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'counseling' %}" class="banner__link"></a>
+                        <!-- Counseling -->
+                        <div class="col-lg-3 offset-lg-12 offse" style="margin-right: 0;!important;">
+                            <div class="banner banner-info-right-center mb--30">
+                                <div class="banner__inner">
+                                    <figure class="banner__image" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                        <img src="{% static 'main/img/cards/card_counseling.png' %}" alt="Banner">
+                                    </figure>
+                                    <a href="{% url 'counseling' %}" class="banner__link"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Session -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/wheelchair_sessions_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'session' %}" class="banner__link"></a>
+                        <!-- Session -->
+                        <div class="col-lg-3 offset-lg-12 offse" style="margin-right: 0;!important;">
+                            <div class="banner banner-info-right-center mb--30">
+                                <div class="banner__inner">
+                                    <figure class="banner__image" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                        <img src="{% static 'main/img/cards/card_session.png' %}" alt="Banner">
+                                    </figure>
+                                    <a href="{% url 'session' %}" class="banner__link"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Visit -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/eye_visit_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'visit' %}" class="banner__link"></a>
+                        <!-- Visit -->
+                        <div class="col-lg-3 offset-lg-12 offse" style="margin-right: 0;!important;">
+                            <div class="banner banner-info-right-center mb--30">
+                                <div class="banner__inner">
+                                    <figure class="banner__image" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                        <img src="{% static 'main/img/cards/card_visit.png' %}" alt="Banner">
+                                    </figure>
+                                    <a href="{% url 'visit' %}" class="banner__link"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Course -->
-                    <div class="col-lg-4 offset-lg-12 offse" style="margin-right: 0;!important;">
-                        <div class="banner banner-info-right-center mb--30">
-                            <div class="banner__inner">
-                                <figure class="banner__image">
-                                    <img src="{% static 'main/img/cards/book_course_big.png' %}" alt="Banner">
-                                </figure>
-                                <a href="{% url 'home' %}" class="banner__link"></a>
+                        <!-- Course -->
+                        <div class="col-lg-3 offset-lg-12 offse" style="margin-right: 0;!important;">
+                            <div class="banner banner-info-right-center mb--30">
+                                <div class="banner__inner">
+                                    <figure class="banner__image" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                        <img src="{% static 'main/img/cards/card_course.png' %}" alt="Banner">
+                                    </figure>
+                                    <a href="{% url 'home' %}" class="banner__link"></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </section>
@@ -130,7 +132,7 @@
 
 
         <!-- Hombaba tasks -->
-        <section class="blog-area mb--70 mb-md--50">
+        <section class="blog-area mb--70 mb-md--50" style="margin-top: 8em;">
             <div class="container">
 
                 <!-- Title -->
@@ -234,13 +236,15 @@
 
 
         <!-- Hombaba blogs -->
-        <section class="blog-area mb--70 mb-md--50">
+        <section class="blog-area mb--70 mb-md--50" style="margin-top: 8em;">
             <div class="container">
+
                 <div class="row mb--35 mb-md--23">
                     <div class="col-12 text-center">
                         <h2 style="font-size: 30px; color: #003379">{% trans 'Latest Articles on Hombaba Blog' %}</h2>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="element-carousel" data-slick-options='{
@@ -274,6 +278,11 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="text-center" style="margin-top: 20px;">
+                    <a href="{% url 'blog_list' %}" class="btn btn-primary" style="padding: 5px 45px; line-height: 2.5em;!important; border: #00A65C solid 1px;">برای مشاهده تمام مقالات، کلیک نمایید</a>
+                </div>
+
             </div>
         </section>
         <!-- end: Hombaba blogs -->

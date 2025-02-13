@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-10 12:42+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: .\templates\pages\404.html:8
+msgid "404"
+msgstr "یافت نشد!"
+
+#: .\templates\pages\about.html:8
+msgid "About"
+msgstr "درباره هومبابا"
+
+#: .\templates\pages\contact.html:8
+msgid "Contact"
+msgstr "تماس با هومبابا"
+
+#: .\templates\pages\faq.html:8
+msgid "FAQ"
+msgstr "سوالات متداول"
+
+#: .\templates\pages\home.html:9
+msgid "Homepage"
+msgstr "صفحه اصلی"
+
+#: .\templates\pages\home.html:46
+msgid "Counseling"
+msgstr "مشاوره"
+
+#: .\templates\pages\home.html:47
+msgid "Session"
+msgstr "جلسه"
+
+#: .\templates\pages\home.html:48
+msgid "Visit"
+msgstr "بازدید"
+
+#: .\templates\pages\home.html:71
+msgid "Hombaba Services"
+msgstr "خدمات هومبابا"
+
+#: .\templates\pages\home.html:141
+msgid "Latest Tasks on Hombaba"
+msgstr "جدیدترین موقعیت‌های کاری"
+
+#: .\templates\pages\home.html:164 .\templates\pages\home.html:168
+msgid "in"
+msgstr "در"
+
+#: .\templates\pages\home.html:173
+msgid "in hombaba (tehran)"
+msgstr "به میزبانی هومبابا (تهران)"
+
+#: .\templates\pages\home.html:187 .\templates\pages\home.html:191
+#: .\templates\pages\home.html:195
+msgid "Total price: "
+msgstr "قیمت کل: "
+
+#: .\templates\pages\home.html:188 .\templates\pages\home.html:192
+#: .\templates\pages\home.html:196
+msgid "Tooman"
+msgstr "تومان"
+
+#: .\templates\pages\home.html:244
+msgid "Latest Articles on Hombaba Blog"
+msgstr "جدیدترین مقالات هومبابا"
+
+#: .\templates\pages\rules.html:8
+msgid "Rules"
+msgstr "قوانین"
