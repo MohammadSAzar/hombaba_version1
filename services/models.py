@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from jdatetime import date, timedelta
 
 
+# --------------------------------- Needs ---------------------------------
 # covered cities
 cities = [
     ('teh', _('Tehran')),
@@ -67,6 +68,33 @@ def next_seven_days_shamsi():
     return final_days
 
 
+# --------------------------------- Locations ---------------------------------
+class Province(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class City(models.Model):
+    name = models.CharField(max_length=100)
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='cities')
+
+    def __str__(self):
+        return self.name
+
+
+class District(models.Model):
+    name = models.CharField(max_length=100)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='districts')
+    price_session = models.PositiveBigIntegerField(verbose_name=_('Session Price'))
+    price_visit = models.PositiveBigIntegerField(verbose_name=_('Visit Price'))
+
+    def __str__(self):
+        return self.name
+
+
+# --------------------------------- Services ---------------------------------
 class Counseling(models.Model):
     # Constants
     COUNSELING_TYPES = [
@@ -120,9 +148,11 @@ class Session(models.Model):
     CUSTOMER_TYPES = customer_types
     DATES = next_seven_days_shamsi
     TIMES = times
+    # Locations
+    province = models.ForeignKey(Province, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('Province'))
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('City'))
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('District'))
     # Fields
-    city = models.CharField(max_length=30, choices=CITIES, default=_('Tehran'), verbose_name=_('City'))
-    district = models.CharField(max_length=30, default='', blank=True, null=True, verbose_name=_('District'))
     customer_type = models.CharField(max_length=30, choices=CUSTOMER_TYPES, verbose_name=_('Customer Type'))
     date = models.CharField(max_length=200, choices=DATES, verbose_name=_('Date of Session'))
     time = models.CharField(max_length=200, choices=TIMES, verbose_name=_('Time of Session'))
@@ -163,9 +193,11 @@ class Visit(models.Model):
     CITIES = cities
     DATES = next_seven_days_shamsi
     TIMES = times
+    # Locations
+    province = models.ForeignKey(Province, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('Province'))
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('City'))
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('District'))
     # Fields
-    city = models.CharField(max_length=30, choices=CITIES, default=_('Tehran'), verbose_name=_('City'))
-    district = models.CharField(max_length=30, default='', blank=True, null=True, verbose_name=_('District'))
     date = models.CharField(max_length=200, choices=DATES, verbose_name=_('Date of Visit'))
     time = models.CharField(max_length=200, choices=TIMES, verbose_name=_('Time of Visit'))
     name_and_family = models.CharField(max_length=200, verbose_name=_('Name and Family'))
