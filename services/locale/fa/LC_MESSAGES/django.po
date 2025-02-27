@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-13 10:39+0330\n"
+"POT-Creation-Date: 2025-02-27 11:53+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,99 +17,124 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\models.py:13 .\models.py:81 .\models.py:124 .\models.py:167
-msgid "Tehran"
-msgstr ""
 
-#: .\models.py:14
+#: .\models.py:14 .\models.py:111
+msgid "Tehran"
+msgstr "تهران"
+
+#: .\models.py:15
 msgid "Karaj"
 msgstr "کرج"
 
-#: .\models.py:19
+#: .\models.py:20
 msgid "Owner / Lessor"
 msgstr "مالک / موجر"
 
-#: .\models.py:20
+#: .\models.py:21
 msgid "Buyer / Tenant"
 msgstr "خریدار / مستاجر"
 
-#: .\models.py:25
+#: .\models.py:26
 msgid "Morning"
 msgstr "صبح"
 
-#: .\models.py:26
+#: .\models.py:27
 msgid "Noon"
 msgstr "ظهر"
 
-#: .\models.py:27
+#: .\models.py:28
 msgid "Evening"
 msgstr "عصر"
 
-#: .\models.py:28
+#: .\models.py:29
 msgid "Night"
 msgstr "شب"
 
-#: .\models.py:73
+#: .\models.py:90
+#| msgid "Session time"
+msgid "Sale Session Price"
+msgstr "قیمت جلسه خرید و فروش"
+
+#: .\models.py:91
+#| msgid "Session time"
+msgid "Rent Session Price"
+msgstr "قیمت جلسه اجاره"
+
+#: .\models.py:92
+#| msgid "Visit time"
+msgid "Sale Visit Price"
+msgstr "قیمت بازدید خرید و فروش"
+
+#: .\models.py:93
+#| msgid "Visit time"
+msgid "Rent Visit Price"
+msgstr "قیمت بازدید اجاره"
+
+#: .\models.py:103
 msgid "In Person"
 msgstr "حضوری"
 
-#: .\models.py:74
+#: .\models.py:104
 msgid "On Phone"
 msgstr "تلفنی"
 
-#: .\models.py:75
+#: .\models.py:105
 msgid "On Chat"
 msgstr "چتی"
 
-#: .\models.py:81 .\models.py:124 .\models.py:167
+#: .\models.py:111 .\models.py:155 .\models.py:200
 msgid "City"
 msgstr "شهر"
 
-#: .\models.py:82
+#: .\models.py:112
 msgid "Counseling Type"
 msgstr "نوع مشاوره"
 
-#: .\models.py:83
+#: .\models.py:113
 msgid "Date of Counseling"
 msgstr "تاریخ مشاوره"
 
-#: .\models.py:84
+#: .\models.py:114
 msgid "Time of Counseling"
 msgstr "زمان مشاوره"
 
-#: .\models.py:85 .\models.py:129 .\models.py:171
+#: .\models.py:115 .\models.py:161 .\models.py:205
 msgid "Name and Family"
 msgstr "نام و نام خانوادگی"
 
-#: .\models.py:86 .\models.py:130 .\models.py:172
+#: .\models.py:116 .\models.py:162 .\models.py:206
 msgid "Phone Number"
 msgstr "شماره تلفن همراه"
 
-#: .\models.py:87 .\models.py:131 .\models.py:173
+#: .\models.py:117 .\models.py:163 .\models.py:207
 msgid "Date and Time of Creation"
 msgstr "زمان و تاریخ ایجاد"
 
-#: .\models.py:125 .\models.py:168
+#: .\models.py:154 .\models.py:199
+msgid "Province"
+msgstr "استان"
+
+#: .\models.py:156 .\models.py:201
 msgid "District"
 msgstr "محله"
 
-#: .\models.py:126
+#: .\models.py:158
 msgid "Customer Type"
 msgstr "نوع مشتری"
 
-#: .\models.py:127
+#: .\models.py:159
 msgid "Date of Session"
 msgstr "تاریخ جلسه"
 
-#: .\models.py:128
+#: .\models.py:160
 msgid "Time of Session"
 msgstr "زمان جلسه"
 
-#: .\models.py:169
+#: .\models.py:203
 msgid "Date of Visit"
 msgstr "تاریخ بازدید"
 
-#: .\models.py:170
+#: .\models.py:204
 msgid "Time of Visit"
 msgstr "زمان بازدید"
 
@@ -140,12 +165,12 @@ msgid "Choose the counseling date"
 msgstr "تاریخ مشاوره را انتخاب کنید"
 
 #: .\templates\services\counseling.html:89
-#: .\templates\services\session.html:104
+#: .\templates\services\session.html:120
 msgid "Choose the counseling time"
 msgstr "زمان مشاوره را انتخاب کنید"
 
 #: .\templates\services\counseling.html:104
-#: .\templates\services\session.html:119 .\templates\services\visit.html:104
+#: .\templates\services\session.html:135 .\templates\services\visit.html:119
 msgid "First and last name"
 msgstr "نام و نام خانوادگی"
 
@@ -307,22 +332,26 @@ msgid "Detail of session request"
 msgstr "جزئیات درخواست جلسه"
 
 #: .\templates\services\session.html:44
+msgid "Choose the session province"
+msgstr "استان برگزاری جلسه را انتخاب کنید"
+
+#: .\templates\services\session.html:60
 msgid "Choose the session city"
 msgstr "شهر برگزاری جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:59 .\templates\services\visit.html:59
+#: .\templates\services\session.html:75 .\templates\services\visit.html:74
 msgid "Choose the district"
 msgstr "محله برگزاری جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:74
+#: .\templates\services\session.html:90
 msgid "Choose the user type"
 msgstr "نوع مشتری را انتخاب کنید"
 
-#: .\templates\services\session.html:89
+#: .\templates\services\session.html:105
 msgid "Choose the session date"
 msgstr "تاریخ جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:132
+#: .\templates\services\session.html:148
 msgid "Submit the session request"
 msgstr "ثبت درخواست جلسه"
 
@@ -357,18 +386,22 @@ msgid "Detail of visit request"
 msgstr "جزئیات بازدید"
 
 #: .\templates\services\visit.html:44
+msgid "Choose the visit province"
+msgstr "استان برگزاری بازدید را انتخاب کنید"
+
+#: .\templates\services\visit.html:59
 msgid "Choose the visit city"
 msgstr "شهر برگزاری بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:74
+#: .\templates\services\visit.html:89
 msgid "Choose the visit date"
 msgstr "تاریخ بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:89
+#: .\templates\services\visit.html:104
 msgid "Choose the visit time"
 msgstr "زمان بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:117
+#: .\templates\services\visit.html:132
 msgid "Submit the visit request"
 msgstr "ثبت درخواست بازدید"
 

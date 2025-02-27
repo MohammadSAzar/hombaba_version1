@@ -71,7 +71,7 @@ msgstr "حساب کاربری"
 
 #: .\_base.html:136
 msgid "Registration"
-msgstr "ورود/ثبت نام"
+msgstr "ورود / ثبت نام"
 
 #: .\_base.html:201
 msgid "Hombaba"
@@ -87,7 +87,7 @@ msgstr "محصولات"
 
 #: .\_base.html:231
 msgid "Hombaba Socials"
-msgstr "هومبابا در شبکه‌های اجتماعی"
+msgstr "شبکه‌های اجتماعی"
 
 #: .\_base.html:234
 msgid "Instagram"

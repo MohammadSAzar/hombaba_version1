@@ -17,7 +17,12 @@ class CounselingForm(forms.ModelForm):
 class SessionForm(forms.ModelForm):
     class Meta:
         model = models.Session
-        fields = ['customer_type', 'city', 'district',  'date', 'time', 'name_and_family']
+        fields = ['customer_type', 'province', 'city', 'district',  'date', 'time', 'name_and_family']
+        widgets = {
+            'province': forms.Select(attrs={'id': 'province'}),
+            'city': forms.Select(attrs={'id': 'city'}),
+            'district': forms.Select(attrs={'id': 'district'})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,7 +33,12 @@ class SessionForm(forms.ModelForm):
 class VisitForm(forms.ModelForm):
     class Meta:
         model = models.Visit
-        fields = ['city', 'district', 'date', 'time', 'name_and_family']
+        fields = ['province', 'city', 'district', 'date', 'time', 'name_and_family']
+        widgets = {
+            'province': forms.Select(attrs={'id': 'province'}),
+            'city': forms.Select(attrs={'id': 'city'}),
+            'district': forms.Select(attrs={'id': 'district'})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

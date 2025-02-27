@@ -87,8 +87,10 @@ class City(models.Model):
 class District(models.Model):
     name = models.CharField(max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='districts')
-    price_session = models.PositiveBigIntegerField(verbose_name=_('Session Price'))
-    price_visit = models.PositiveBigIntegerField(verbose_name=_('Visit Price'))
+    price_session_sale = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Sale Session Price'))
+    price_session_rent = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Rent Session Price'))
+    price_visit_sale = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Sale Visit Price'))
+    price_visit_rent = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Rent Visit Price'))
 
     def __str__(self):
         return self.name

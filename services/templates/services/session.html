@@ -11,7 +11,7 @@
 
 {% block content %}
 
-    <main class="flex-grow bg-secondary-light pb-14 pt-36 dark:bg-primary-dark xs:pt-36" style="background-color: transparent">
+    <main class="flex-grow bg-secondary-light pb-14 pt-36  dark:bg-primary-dark xs:pt-36" style="background-color: transparent">
         <div class="container pb-14">
             <div class="grid grid-cols-12 gap-2 lg:gap-6">
 
@@ -36,6 +36,22 @@
                             <div class="grid grid-cols-1 items-center gap-6 mt-2">
                                 <form method="post" novalidate>
                                     {% csrf_token %}
+
+                                    <!-- Province -->
+                                    <div class="col-span-2 md:col-span-1 mt-2 mb-12">
+                                        <label for="{{ form.province.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
+                                            <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
+                                              {% trans 'Choose the session province' %}
+                                            </span>
+                                            {% render_field form.province type="text" id="province" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" %}
+                                        </label>
+                                        {% if form.province.errors %}
+                                            {% for error in form.province.errors %}
+                                                <p style="color: red; font-size: 0.9em;">{{ error }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+
 
                                     <!-- City -->
                                     <div class="col-span-2 md:col-span-1 mt-2 mb-12">

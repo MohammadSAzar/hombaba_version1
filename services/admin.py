@@ -2,8 +2,23 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 
-from .models import Counseling, Session, Visit
+from .models import Counseling, Session, Visit, Province, City, District
 from accounts.models import Task
+
+
+@admin.register(Province)
+class ProvinceAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'province')
+
+
+@admin.register(District)
+class DistrictAdmin(admin.ModelAdmin):
+    list_display = ('name', 'city', 'price_session_sale', 'price_session_rent', 'price_visit_sale', 'price_visit_rent',)
 
 
 @admin.register(Counseling)
