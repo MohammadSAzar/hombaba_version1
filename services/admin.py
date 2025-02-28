@@ -18,7 +18,7 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
-    list_display = ('name', 'city', 'price_session_sale', 'price_session_rent', 'price_visit_sale', 'price_visit_rent',)
+    list_display = ('name', 'city', 'price_session_sale', 'price_session_rent', 'price_visit')
 
 
 @admin.register(Counseling)

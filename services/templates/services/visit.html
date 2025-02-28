@@ -13,7 +13,7 @@
 
     <main class="flex-grow bg-secondary-light pb-14 pt-36 dark:bg-primary-dark xs:pt-36" style="background-color: transparent">
         <div class="container pb-14">
-            <div class="grid grid-cols-12 gap-2 lg:gap-6">
+            <div class="grid grid-cols-12 gap-2  lg:gap-6">
 
                 <!-- top ribbon  -->
                 <div class="col-span-12 rounded-lg bg-primary-light dark:bg-secondary-dark">
@@ -34,6 +34,8 @@
 
                         <div class="col-span-5 md:col-span-3">
                             <div class="grid grid-cols-1 items-center gap-6 mt-2">
+
+                                <!-- form  -->
                                 <form method="post" novalidate>
                                     {% csrf_token %}
 
@@ -133,6 +135,53 @@
                                     </div>
 
                                 </form>
+
+                                <!-- JS  -->
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#district').hide(); // Hide district field initially
+
+                                        $('#province').change(function() {
+                                            var provinceId = $(this).val();
+                                            $.ajax({
+                                                url: '/load_cities/',
+                                                data: {
+                                                    'province': provinceId
+                                                },
+                                                success: function(data) {
+                                                    $('#city').html('');
+                                                    $('#district').hide(); // Hide district field when changing province
+                                                    $.each(data.cities, function(index, city) {
+                                                        $('#city').append(`<option value="${city[0]}">${city[1]}</option>`);
+                                                    });
+                                                    $('#city').trigger('change'); // Trigger change event on city select
+                                                }
+                                            });
+                                        });
+
+                                        $('#city').change(function() {
+                                            var cityId = $(this).val();
+                                            $.ajax({
+                                                url: '/load_districts/',
+                                                data: {
+                                                    'city': cityId
+                                                },
+                                                success: function(data) {
+                                                    $('#district').html('');
+                                                    if (data.districts.length > 0) {
+                                                        $('#district').show(); // Show district field only if there are districts
+                                                        $.each(data.districts, function(index, district) {
+                                                            $('#district').append(`<option value="${district[0]}">${district[1]}</option>`);
+                                                        });
+                                                    } else {
+                                                        $('#district').hide(); // Hide district field if there are no districts
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
                             </div>
                         </div>
 

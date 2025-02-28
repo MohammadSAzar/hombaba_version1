@@ -3,6 +3,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('load_cities/', views.load_cities, name='load_cities'),
+    path('load_districts/', views.load_districts, name='load_districts'),
+    path('get-cities/', views.load_cities_list, name='load_cities_list'),
+    path('get-districts/', views.load_districts_list, name='load_districts_list'),
     # Counseling URLs
     path('counseling/', views.counseling_view, name='counseling'),
     path('counseling/registration', views.counseling_registration_view, name='counseling_registration'),

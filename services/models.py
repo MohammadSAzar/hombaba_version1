@@ -85,12 +85,11 @@ class City(models.Model):
 
 
 class District(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=1000)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='districts')
     price_session_sale = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Sale Session Price'))
     price_session_rent = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Rent Session Price'))
-    price_visit_sale = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Sale Visit Price'))
-    price_visit_rent = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Rent Visit Price'))
+    price_visit = models.PositiveBigIntegerField(blank=True, null=True, default=1, verbose_name=_('Visit Price'))
 
     def __str__(self):
         return self.name
@@ -151,7 +150,7 @@ class Session(models.Model):
     DATES = next_seven_days_shamsi
     TIMES = times
     # Locations
-    province = models.ForeignKey(Province, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('Province'))
+    province = models.ForeignKey(Province, on_delete=models.SET_NULL, default='تهران', null=True, blank=True, related_name='sessions', verbose_name=_('Province'))
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('City'))
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('District'))
     # Fields
@@ -196,7 +195,7 @@ class Visit(models.Model):
     DATES = next_seven_days_shamsi
     TIMES = times
     # Locations
-    province = models.ForeignKey(Province, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('Province'))
+    province = models.ForeignKey(Province, on_delete=models.SET_NULL, default='تهران', null=True, blank=True, related_name='visits', verbose_name=_('Province'))
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('City'))
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name='visits', verbose_name=_('District'))
     # Fields

@@ -1,14 +1,41 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
 from accounts.models import CustomUserModel
 from accounts.forms import RegistrationForm
 from accounts.checkers import send_otp, get_random_otp, otp_time_checker
 
-from .models import Counseling, Session, Visit
+from .models import Counseling, Session, Visit, City, District
 from .forms import CounselingForm, SessionForm, VisitForm
+
+
+# --------------------------------- Locations ---------------------------------
+def load_cities(request):
+    province_id = request.GET.get('province')
+    cities = City.objects.filter(province_id=province_id).order_by('name')
+    city_choices = [(city.id, city.name) for city in cities]
+    return JsonResponse({'cities': city_choices})
+
+
+def load_districts(request):
+    city_id = request.GET.get('city')
+    districts = District.objects.filter(city_id=city_id).order_by('name')
+    district_choices = [(district.id, district.name) for district in districts]
+    return JsonResponse({'districts': district_choices})
+
+
+def load_cities_list(request):
+    province_id = request.GET.get('province_id')
+    cities = City.objects.filter(province_id=province_id).values('id', 'name')
+    return JsonResponse({'cities': list(cities)})
+
+
+def load_districts_list(request):
+    city_id = request.GET.get('city_id')
+    districts = District.objects.filter(city_id=city_id).values('id', 'name')
+    return JsonResponse({'districts': list(districts)})
 
 
 # -------------------------------------- Counseling Views -------------------------------------- #
