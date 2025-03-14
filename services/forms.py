@@ -17,7 +17,7 @@ class CounselingForm(forms.ModelForm):
 class SessionForm(forms.ModelForm):
     class Meta:
         model = models.Session
-        fields = ['customer_type', 'province', 'city', 'district',  'date', 'time', 'name_and_family']
+        fields = ['customer_type', 'trade_type', 'province', 'city', 'district',  'date', 'time', 'name_and_family']
         widgets = {
             'province': forms.Select(attrs={'id': 'province'}),
             'city': forms.Select(attrs={'id': 'city'}),

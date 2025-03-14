@@ -21,6 +21,12 @@ customer_types = [
     ('bt', _('Buyer / Tenant')),
 ]
 
+# trade types
+trade_types = [
+    ('rt', _('Rent Trade')),
+    ('st', _('Sale Trade')),
+]
+
 # day times
 times = [
     ('mg', _('Morning')),
@@ -147,6 +153,7 @@ class Session(models.Model):
     # Constants
     CITIES = cities
     CUSTOMER_TYPES = customer_types
+    TRADE_TYPES = trade_types
     DATES = next_seven_days_shamsi
     TIMES = times
     # Locations
@@ -155,6 +162,7 @@ class Session(models.Model):
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True, related_name='sessions', verbose_name=_('District'))
     # Fields
     customer_type = models.CharField(max_length=30, choices=CUSTOMER_TYPES, verbose_name=_('Customer Type'))
+    trade_type = models.CharField(max_length=30, blank=True, null=True, choices=TRADE_TYPES, verbose_name=_('Trade Type'))
     date = models.CharField(max_length=200, choices=DATES, verbose_name=_('Date of Session'))
     time = models.CharField(max_length=200, choices=TIMES, verbose_name=_('Time of Session'))
     name_and_family = models.CharField(max_length=200, verbose_name=_('Name and Family'))
@@ -163,17 +171,20 @@ class Session(models.Model):
 
     @property
     def price(self):
-        price = session_price_value
+        if self.trade_type == 'rt':
+            price = self.district.price_session_rent
+        else:
+            price = self.district.price_session_sale
         return price
 
     @property
     def tax(self):
-        tax = int(session_price_value * 0.1)
+        tax = int(self.price * 0.1)
         return tax
 
     @property
     def price_plus_tax(self):
-        price_plus_tax = int(session_price_value + session_price_value * 0.1)
+        price_plus_tax = int(self.price + self.tax)
         return price_plus_tax
 
     @property
@@ -207,17 +218,17 @@ class Visit(models.Model):
 
     @property
     def price(self):
-        price = visit_price_value
+        price = self.district.price_visit
         return price
 
     @property
     def tax(self):
-        tax = int(visit_price_value * 0.1)
+        tax = int(self.price * 0.1)
         return tax
 
     @property
     def price_plus_tax(self):
-        price_plus_tax = int(visit_price_value + visit_price_value*0.1)
+        price_plus_tax = int(self.price + self.tax)
         return price_plus_tax
 
     @property

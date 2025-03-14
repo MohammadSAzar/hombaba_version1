@@ -13,7 +13,7 @@
 
     <main class="flex-grow bg-secondary-light pb-14 pt-36 dark:bg-primary-dark xs:pt-36" style="background-color: transparent">
         <div class="container pb-14">
-            <div class="grid grid-cols-12  gap-2 lg:gap-6">
+            <div class="grid grid-cols-12 gap-2  lg:gap-6">
 
                 <!-- top ribbon  -->
                 <div class="col-span-12 rounded-lg bg-primary-light dark:bg-secondary-dark">
@@ -88,12 +88,27 @@
                                     <div class="col-span-2 md:col-span-1 mb-12">
                                         <label for="{{ form.customer_type.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
                                             <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
-                                                {% trans 'Choose the user type' %}
+                                                {% trans 'Choose the customer type' %}
                                             </span>
                                             {% render_field form.customer_type type="text" id="customer_type" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" %}
                                         </label>
                                         {% if form.customer_type.errors %}
                                             {% for error in form.customer_type.errors %}
+                                                <p style="color: red; font-size: 0.9em;">{{ error }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Trade type -->
+                                    <div class="col-span-2 md:col-span-1 mb-12">
+                                        <label for="{{ form.trade_type.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
+                                            <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
+                                                {% trans 'Choose the trade type' %}
+                                            </span>
+                                            {% render_field form.trade_type type="text" id="trade_type" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" %}
+                                        </label>
+                                        {% if form.trade_type.errors %}
+                                            {% for error in form.trade_type.errors %}
                                                 <p style="color: red; font-size: 0.9em;">{{ error }}</p>
                                             {% endfor %}
                                         {% endif %}
@@ -118,7 +133,7 @@
                                     <div class="col-span-2 md:col-span-1 mb-12">
                                         <label for="{{ form.time.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
                                             <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
-                                                {% trans 'Choose the counseling time' %}
+                                                {% trans 'Choose the session time' %}
                                             </span>
                                             {% render_field form.time class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" %}
                                         </label>

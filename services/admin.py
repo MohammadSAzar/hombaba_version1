@@ -42,7 +42,8 @@ class CounselingAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('city', 'district', 'status', 'task_link', 'customer_type', 'date', 'time', 'name_and_family', 'phone_number', 'datetime_created')
+    list_display = ('city', 'district', 'status', 'task_link', 'customer_type', 'trade_type', 'date', 'time',
+                    'name_and_family', 'phone_number', 'datetime_created')
     ordering = ('-datetime_created', )
 
     def status(self, obj):

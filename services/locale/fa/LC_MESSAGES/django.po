@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 11:53+0330\n"
+"POT-Creation-Date: 2025-03-14 14:31+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\models.py:14 .\models.py:111
+#: .\models.py:14 .\models.py:116
 msgid "Tehran"
 msgstr "تهران"
 
@@ -35,106 +35,110 @@ msgid "Buyer / Tenant"
 msgstr "خریدار / مستاجر"
 
 #: .\models.py:26
+msgid "Rent Trade"
+msgstr "رهن و اجاره"
+
+#: .\models.py:27
+msgid "Sale Trade"
+msgstr "خرید و فروش"
+
+#: .\models.py:32
 msgid "Morning"
 msgstr "صبح"
 
-#: .\models.py:27
+#: .\models.py:33
 msgid "Noon"
 msgstr "ظهر"
 
-#: .\models.py:28
+#: .\models.py:34
 msgid "Evening"
 msgstr "عصر"
 
-#: .\models.py:29
+#: .\models.py:35
 msgid "Night"
 msgstr "شب"
 
-#: .\models.py:90
-#| msgid "Session time"
+#: .\models.py:96
 msgid "Sale Session Price"
 msgstr "قیمت جلسه خرید و فروش"
 
-#: .\models.py:91
-#| msgid "Session time"
+#: .\models.py:97
 msgid "Rent Session Price"
-msgstr "قیمت جلسه اجاره"
+msgstr "قیمت جلسه رهن و اجاره"
 
-#: .\models.py:92
-#| msgid "Visit time"
-msgid "Sale Visit Price"
-msgstr "قیمت بازدید خرید و فروش"
+#: .\models.py:98
+msgid "Visit Price"
+msgstr "قیمت بازدید"
 
-#: .\models.py:93
-#| msgid "Visit time"
-msgid "Rent Visit Price"
-msgstr "قیمت بازدید اجاره"
-
-#: .\models.py:103
+#: .\models.py:108
 msgid "In Person"
 msgstr "حضوری"
 
-#: .\models.py:104
+#: .\models.py:109
 msgid "On Phone"
 msgstr "تلفنی"
 
-#: .\models.py:105
+#: .\models.py:110
 msgid "On Chat"
 msgstr "چتی"
 
-#: .\models.py:111 .\models.py:155 .\models.py:200
+#: .\models.py:116 .\models.py:161 .\models.py:210
 msgid "City"
 msgstr "شهر"
 
-#: .\models.py:112
+#: .\models.py:117
 msgid "Counseling Type"
 msgstr "نوع مشاوره"
 
-#: .\models.py:113
+#: .\models.py:118
 msgid "Date of Counseling"
 msgstr "تاریخ مشاوره"
 
-#: .\models.py:114
+#: .\models.py:119
 msgid "Time of Counseling"
 msgstr "زمان مشاوره"
 
-#: .\models.py:115 .\models.py:161 .\models.py:205
+#: .\models.py:120 .\models.py:168 .\models.py:215
 msgid "Name and Family"
 msgstr "نام و نام خانوادگی"
 
-#: .\models.py:116 .\models.py:162 .\models.py:206
+#: .\models.py:121 .\models.py:169 .\models.py:216
 msgid "Phone Number"
 msgstr "شماره تلفن همراه"
 
-#: .\models.py:117 .\models.py:163 .\models.py:207
+#: .\models.py:122 .\models.py:170 .\models.py:217
 msgid "Date and Time of Creation"
 msgstr "زمان و تاریخ ایجاد"
 
-#: .\models.py:154 .\models.py:199
+#: .\models.py:160 .\models.py:209
 msgid "Province"
 msgstr "استان"
 
-#: .\models.py:156 .\models.py:201
+#: .\models.py:162 .\models.py:211
 msgid "District"
 msgstr "محله"
 
-#: .\models.py:158
+#: .\models.py:164
 msgid "Customer Type"
 msgstr "نوع مشتری"
 
-#: .\models.py:159
+#: .\models.py:165
+msgid "Trade Type"
+msgstr "نوع معامله"
+
+#: .\models.py:166
 msgid "Date of Session"
 msgstr "تاریخ جلسه"
 
-#: .\models.py:160
+#: .\models.py:167
 msgid "Time of Session"
 msgstr "زمان جلسه"
 
-#: .\models.py:203
+#: .\models.py:213
 msgid "Date of Visit"
 msgstr "تاریخ بازدید"
 
-#: .\models.py:204
+#: .\models.py:214
 msgid "Time of Visit"
 msgstr "زمان بازدید"
 
@@ -165,12 +169,11 @@ msgid "Choose the counseling date"
 msgstr "تاریخ مشاوره را انتخاب کنید"
 
 #: .\templates\services\counseling.html:89
-#: .\templates\services\session.html:120
 msgid "Choose the counseling time"
 msgstr "زمان مشاوره را انتخاب کنید"
 
 #: .\templates\services\counseling.html:104
-#: .\templates\services\session.html:135 .\templates\services\visit.html:119
+#: .\templates\services\session.html:151 .\templates\services\visit.html:121
 msgid "First and last name"
 msgstr "نام و نام خانوادگی"
 
@@ -331,27 +334,35 @@ msgstr "ثبت درخواست حضور در جلسه"
 msgid "Detail of session request"
 msgstr "جزئیات درخواست جلسه"
 
-#: .\templates\services\session.html:44
+#: .\templates\services\session.html:46
 msgid "Choose the session province"
 msgstr "استان برگزاری جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:60
+#: .\templates\services\session.html:61
 msgid "Choose the session city"
 msgstr "شهر برگزاری جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:75 .\templates\services\visit.html:74
+#: .\templates\services\session.html:76 .\templates\services\visit.html:76
 msgid "Choose the district"
 msgstr "محله برگزاری جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:90
-msgid "Choose the user type"
+#: .\templates\services\session.html:91
+msgid "Choose the customer type"
 msgstr "نوع مشتری را انتخاب کنید"
 
-#: .\templates\services\session.html:105
+#: .\templates\services\session.html:106
+msgid "Choose the trade type"
+msgstr "نوع معامله را انتخاب کنید"
+
+#: .\templates\services\session.html:121
 msgid "Choose the session date"
 msgstr "تاریخ جلسه را انتخاب کنید"
 
-#: .\templates\services\session.html:148
+#: .\templates\services\session.html:136
+msgid "Choose the session time"
+msgstr "زمان جلسه را انتخاب کنید"
+
+#: .\templates\services\session.html:164
 msgid "Submit the session request"
 msgstr "ثبت درخواست جلسه"
 
@@ -385,23 +396,23 @@ msgstr "ثبت درخواست حضور در بازدید"
 msgid "Detail of visit request"
 msgstr "جزئیات بازدید"
 
-#: .\templates\services\visit.html:44
+#: .\templates\services\visit.html:46
 msgid "Choose the visit province"
 msgstr "استان برگزاری بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:59
+#: .\templates\services\visit.html:61
 msgid "Choose the visit city"
 msgstr "شهر برگزاری بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:89
+#: .\templates\services\visit.html:91
 msgid "Choose the visit date"
 msgstr "تاریخ بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:104
+#: .\templates\services\visit.html:106
 msgid "Choose the visit time"
 msgstr "زمان بازدید را انتخاب کنید"
 
-#: .\templates\services\visit.html:132
+#: .\templates\services\visit.html:134
 msgid "Submit the visit request"
 msgstr "ثبت درخواست بازدید"
 
