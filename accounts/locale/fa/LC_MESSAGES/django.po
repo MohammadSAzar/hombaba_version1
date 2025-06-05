@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 11:45+0330\n"
+"POT-Creation-Date: 2025-06-05 17:28+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,143 +17,144 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\models.py:33
-msgid "Authenticated"
-msgstr ""
 
-#: .\models.py:34
-msgid "Not Authenticated"
-msgstr "تایید نشده"
-
-#: .\models.py:35 .\templates\accounts\profile_info_now.html:131
-msgid "In Progress"
-msgstr "در حال بررسی"
-
-#: .\models.py:41
-msgid "Authentication Status"
-msgstr "وضعیت تایید حساب کاربری"
-
-#: .\models.py:52
+#: .\choices.py:4
 msgid "Male"
 msgstr "آقا"
 
-#: .\models.py:53
+#: .\choices.py:5
 msgid "Female"
 msgstr "خانم"
 
-#: .\models.py:56
+#: .\choices.py:10
 msgid "Instagram"
 msgstr "اینستاگرام"
 
-#: .\models.py:57
+#: .\choices.py:11
 msgid "Course Videos"
 msgstr "ویدئوهای آموزشی"
 
-#: .\models.py:58
+#: .\choices.py:12
 msgid "Advertisements"
 msgstr "تبلیغات"
 
-#: .\models.py:59
+#: .\choices.py:13
 msgid "Website and Google"
 msgstr "وبسایت یا گوگل"
 
-#: .\models.py:60
+#: .\choices.py:14
 msgid "Friends"
 msgstr "دوستان"
 
-#: .\models.py:61
+#: .\choices.py:15
 msgid "Others"
 msgstr "سایر"
 
-#: .\models.py:64 .\templates\accounts\profile_info_auth.html:65
-msgid "First Name"
-msgstr "نام"
-
-#: .\models.py:65 .\templates\accounts\profile_info_auth.html:76
-msgid "Last Name"
-msgstr "نام خانوادگی"
-
-#: .\models.py:66 .\templates\accounts\profile_info_auth.html:87
-msgid "Sex"
-msgstr "جنسیت"
-
-#: .\models.py:67 .\templates\accounts\profile_info_auth.html:98
-msgid "National Code"
-msgstr "کد ملی"
-
-#: .\models.py:68 .\templates\accounts\profile_info_auth.html:131
-#: .\templates\accounts\profile_info_edit.html:95
-msgid "Email"
-msgstr "ایمیل"
-
-#: .\models.py:69 .\templates\accounts\profile_info_auth.html:109
-#: .\templates\accounts\profile_info_edit.html:73
-msgid "Province"
-msgstr "استان"
-
-#: .\models.py:70 .\templates\accounts\profile_info_auth.html:120
-#: .\templates\accounts\profile_info_edit.html:84
-#: .\templates\accounts\profile_your_services.html:148
-msgid "City"
-msgstr "شهر"
-
-#: .\models.py:71 .\templates\accounts\profile_info_auth.html:142
-#: .\templates\accounts\profile_info_edit.html:106
-msgid "Address"
-msgstr "آدرس"
-
-#: .\models.py:72
-msgid "Introduction Way"
-msgstr "روش آشنایی"
-
-#: .\models.py:87 .\templates\accounts\profile_info_auth.html:23
+#: .\choices.py:19 .\templates\accounts\profile_info_auth.html:23
 #: .\templates\accounts\profile_info_edit.html:23
 #: .\templates\accounts\profile_info_now.html:23
 #: .\templates\accounts\profile_your_services.html:23
 msgid "Counseling"
 msgstr "مشاوره"
 
-#: .\models.py:88
+#: .\choices.py:20
 msgid "Session"
-msgstr "جلسه"
+msgstr "نشست"
 
-#: .\models.py:89
+#: .\choices.py:21
 msgid "Visit"
 msgstr "بازدید"
 
-#: .\models.py:92
-msgid "Yes"
-msgstr "بله"
-
-#: .\models.py:93
-msgid "No"
-msgstr "خیر"
-
-#: .\models.py:96
+#: .\choices.py:25
 msgid "Taken"
 msgstr "بسته"
 
-#: .\models.py:97
+#: .\choices.py:26
 msgid "Free"
 msgstr "باز"
 
-#: .\models.py:98
+#: .\choices.py:27
 msgid "Pending"
 msgstr "در حال بررسی"
 
-#: .\models.py:103
+#: .\choices.py:32
+msgid "Yes"
+msgstr "بله"
+
+#: .\choices.py:33
+msgid "No"
+msgstr "خیر"
+
+#: .\models.py:41
+msgid "Authenticated"
+msgstr "تایید شده"
+
+#: .\models.py:42
+msgid "Not Authenticated"
+msgstr "تایید نشده"
+
+#: .\models.py:43 .\templates\accounts\profile_info_now.html:131
+msgid "In Progress"
+msgstr "در حال بررسی"
+
+#: .\models.py:49
+msgid "Authentication Status"
+msgstr "وضعیت تایید حساب کاربری"
+
+#: .\models.py:59 .\templates\accounts\profile_info_auth.html:65
+msgid "First Name"
+msgstr "نام"
+
+#: .\models.py:60 .\templates\accounts\profile_info_auth.html:76
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: .\models.py:61 .\templates\accounts\profile_info_auth.html:87
+msgid "Sex"
+msgstr "جنسیت"
+
+#: .\models.py:62 .\templates\accounts\profile_info_auth.html:98
+msgid "National Code"
+msgstr "کد ملی"
+
+#: .\models.py:63 .\templates\accounts\profile_info_auth.html:131
+#: .\templates\accounts\profile_info_edit.html:95
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\models.py:64 .\templates\accounts\profile_info_auth.html:109
+#: .\templates\accounts\profile_info_edit.html:73
+msgid "Province"
+msgstr "استان"
+
+#: .\models.py:65 .\templates\accounts\profile_info_auth.html:120
+#: .\templates\accounts\profile_info_edit.html:84
+#: .\templates\accounts\profile_your_services.html:148
+msgid "City"
+msgstr "شهر"
+
+#: .\models.py:66 .\templates\accounts\profile_info_auth.html:142
+#: .\templates\accounts\profile_info_edit.html:106
+msgid "Address"
+msgstr "آدرس"
+
+#: .\models.py:67
+msgid "Introduction Way"
+msgstr "روش آشنایی"
+
+#: .\models.py:88
 msgid "Task Type"
 msgstr "نوع موقعیت کاری"
 
-#: .\models.py:104
+#: .\models.py:89
 msgid "Payment Status"
 msgstr "وضعیت پرداخت"
 
-#: .\models.py:105
+#: .\models.py:90
 msgid "Request Status"
 msgstr "وضعیت موقعیت کاری"
 
-#: .\models.py:107
+#: .\models.py:92
 msgid "Date and Time of Creation"
 msgstr "زمان و تاریخ ایجاد"
 
@@ -166,7 +167,7 @@ msgstr "تایید حساب کاربری"
 #: .\templates\accounts\profile_info_now.html:28
 #: .\templates\accounts\profile_your_services.html:28
 msgid "Participation in Session"
-msgstr "حضور در جلسه"
+msgstr "حضور در نشست"
 
 #: .\templates\accounts\profile_info_auth.html:33
 #: .\templates\accounts\profile_info_edit.html:33
@@ -263,7 +264,7 @@ msgstr "وضعیت"
 
 #: .\templates\accounts\profile_your_services.html:96
 msgid "Sessions"
-msgstr "جلسات"
+msgstr "نشست‌ها"
 
 #: .\templates\accounts\profile_your_services.html:135
 msgid "Visits"
@@ -304,3 +305,6 @@ msgstr "کد تایید را وارد نمایید: "
 #: .\templates\accounts\verification.html:60
 msgid "Register in Hombaba"
 msgstr "ورود به هومبابا"
+
+
+

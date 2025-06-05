@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 12:34+0330\n"
+"POT-Creation-Date: 2025-06-05 17:31+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,68 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\models.py:9
-msgid "Category title"
-msgstr "عنوان دسته‌بندی"
 
-#: .\models.py:26
-msgid "Blog cover"
-msgstr "کاور مقاله"
+#: .\choices.py:5
+msgid "Published"
+msgstr "انتشار یافته"
 
-#: .\models.py:27
-msgid "Blog category"
-msgstr "دسته‌بندی مقاله"
+#: .\choices.py:6
+msgid "Draft"
+msgstr "پیش‌نویس"
 
-#: .\models.py:28
-msgid "Blog title"
-msgstr "عنوان مقاله"
-
-#: .\models.py:29
-msgid "Blog body"
-msgstr "متن مقاله"
-
-#: .\models.py:30
-msgid "Datetime of creation"
-msgstr "تاریخ و زمان ایجاد"
-
-#: .\models.py:31
-msgid "Datetime of modification"
-msgstr "تاریخ و زمان اصلاح"
-
-#: .\models.py:33
-msgid "Blog status"
-msgstr "وضعیت مقاله"
-
-#: .\models.py:51
+#: .\choices.py:11
 msgid "Accepted"
 msgstr "تایید شده"
 
-#: .\models.py:52
+#: .\choices.py:12
 msgid "Rejected"
 msgstr "رد شده"
 
-#: .\models.py:53
+#: .\choices.py:13
 msgid "Waiting"
 msgstr "در حال بررسی"
 
-#: .\models.py:59
+#: .\models.py:11
+msgid "Category title"
+msgstr "عنوان دسته‌بندی"
+
+#: .\models.py:31
+msgid "Blog cover"
+msgstr "تصویر مقاله"
+
+#: .\models.py:32
+msgid "Blog category"
+msgstr "دسته‌بندی مقاله"
+
+#: .\models.py:33
+msgid "Blog title"
+msgstr "عنوان مقاله"
+
+#: .\models.py:34
+msgid "Blog body"
+msgstr "متن مقاله"
+
+#: .\models.py:35
+msgid "Datetime of creation"
+msgstr "تاریخ و زمان ایجاد"
+
+#: .\models.py:36
+msgid "Datetime of modification"
+msgstr "تاریخ و زمان اصلاح"
+
+#: .\models.py:38
+msgid "Blog status"
+msgstr "وضعیت مقاله"
+
+#: .\models.py:58
 msgid "Comment Name"
 msgstr "نگارنده پیام"
 
-#: .\models.py:61
+#: .\models.py:60
 msgid "Comment Text"
 msgstr "متن پیام"
 
-#: .\models.py:62 .\models.py:79
+#: .\models.py:61 .\models.py:79
 msgid "Status"
 msgstr "وضعیت"
 
@@ -259,3 +268,5 @@ msgstr "نظر خود را بنویسید"
 #: .\templates\blog\blog_list.html:11
 msgid "Blog"
 msgstr "بلاگ"
+
+

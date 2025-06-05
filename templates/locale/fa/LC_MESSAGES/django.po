@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-13 11:05+0330\n"
+"POT-Creation-Date: 2025-06-05 17:41+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
 #: .\_base.html:72 .\_base.html:289
 msgid "Home"
 msgstr "خانه"
@@ -31,7 +32,7 @@ msgstr "مشاوره"
 
 #: .\_base.html:80 .\_base.html:221 .\_base.html:300
 msgid "Participation in Session"
-msgstr "حضور در جلسه"
+msgstr "حضور در نشست"
 
 #: .\_base.html:81 .\_base.html:222 .\_base.html:303
 msgid "Participation in Visit"
@@ -69,7 +70,7 @@ msgstr "دوره آموزشی"
 msgid "Dashboard"
 msgstr "حساب کاربری"
 
-#: .\_base.html:136
+#: .\_base.html:136 .\_base.html:253
 msgid "Registration"
 msgstr "ورود / ثبت نام"
 
@@ -136,3 +137,5 @@ msgstr "خدمات دریافتی"
 #: .\_base_profile.html:171
 msgid "Exit"
 msgstr "خروج"
+
+

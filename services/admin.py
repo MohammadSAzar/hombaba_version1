@@ -18,12 +18,12 @@ class CityAdmin(admin.ModelAdmin):
 
 @admin.register(District)
 class DistrictAdmin(admin.ModelAdmin):
-    list_display = ('name', 'city', 'price_session_sale', 'price_session_rent', 'price_visit')
+    list_display = ('name', 'city', 'price_session_sale', 'price_visit_sale', 'price_session_rent', 'price_visit_rent')
 
 
 @admin.register(Counseling)
 class CounselingAdmin(admin.ModelAdmin):
-    list_display = ('counseling_type', 'status', 'task_link', 'date', 'time', 'name_and_family', 'phone_number', 'datetime_created',)
+    list_display = ('counseling_type', 'status', 'code', 'date', 'task_link', 'name_and_family', 'phone_number', 'datetime_created',)
     ordering = ('-datetime_created', )
 
     def status(self, obj):
@@ -42,8 +42,8 @@ class CounselingAdmin(admin.ModelAdmin):
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('city', 'district', 'status', 'task_link', 'customer_type', 'trade_type', 'date', 'time',
-                    'name_and_family', 'phone_number', 'datetime_created')
+    list_display = ('district', 'status', 'code', 'date', 'task_link', 'customer_type', 'trade_type', 'name_and_family',
+                    'phone_number', 'datetime_created')
     ordering = ('-datetime_created', )
 
     def status(self, obj):
@@ -62,7 +62,8 @@ class SessionAdmin(admin.ModelAdmin):
 
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-    list_display = ('city', 'district', 'status', 'task_link', 'date', 'time', 'name_and_family', 'phone_number', 'datetime_created')
+    list_display = ('district', 'status', 'code', 'date', 'task_link', 'trade_type', 'name_and_family',
+                    'phone_number', 'datetime_created')
     ordering = ('-datetime_created', )
 
     def status(self, obj):
@@ -77,5 +78,6 @@ class VisitAdmin(admin.ModelAdmin):
             url = reverse("admin:accounts_task_change", args=[task.id])
             return format_html('<a href="{}">View Task</a>', url)
     task_link.short_description = 'task_link'
+
 
 

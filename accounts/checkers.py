@@ -23,7 +23,7 @@ def send_otp(phone_number, otp):
             'type': 'sms',  # sms vs call
         }
         response = api.verify_lookup(params)
-        print(response)
+        # print(response)
     except APIException as e:
         print(e)
     except HTTPException as e:
@@ -65,6 +65,8 @@ def otp_checker(otp):
 
 
 email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+
 def email_checker(email):
     if re.fullmatch(email_regex, email):
         return True

@@ -4,16 +4,20 @@ import string
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from .managers import CustomUserManager
 from services.models import Counseling, Session, Visit
+from . import choices
 
 
 # --------------------------------- Locations ---------------------------------
 class Province(models.Model):
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'استان'
+        verbose_name_plural = 'استان‌ها'
 
     def __str__(self):
         return self.name
@@ -22,6 +26,10 @@ class Province(models.Model):
 class City(models.Model):
     name = models.CharField(max_length=100)
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='cities')
+
+    class Meta:
+        verbose_name = 'شهر'
+        verbose_name_plural = 'شهرها'
 
     def __str__(self):
         return self.name
@@ -47,30 +55,21 @@ class CustomUserModel(AbstractUser):
 
 
 class Profile(models.Model):
-    # Choices
-    SEX_CHOICES = [
-        ('m', _('Male')),
-        ('f', _('Female')),
-    ]
-    INT_CHOICES = [
-        ('ins', _('Instagram')),
-        ('y&a', _('Course Videos')),
-        ('ads', _('Advertisements')),
-        ('web', _('Website and Google')),
-        ('frd', _('Friends')),
-        ('oth', _('Others')),
-    ]
     # Fields
     f_name = models.CharField(max_length=100, blank=True, null=True, default='', verbose_name=_('First Name'))
     l_name = models.CharField(max_length=100, blank=True, null=True, default='', verbose_name=_('Last Name'))
-    sex = models.CharField(max_length=10, choices=SEX_CHOICES, blank=True, null=True, verbose_name=_('Sex'))
+    sex = models.CharField(max_length=10, choices=choices.sexes, blank=True, null=True, verbose_name=_('Sex'))
     national_code = models.CharField(max_length=10, blank=True, null=True, verbose_name=_('National Code'))
     email = models.CharField(max_length=300, blank=True, null=True, verbose_name=_('Email'))
     province = models.CharField(max_length=150, blank=True, null=True, verbose_name=_('Province'))
     city = models.CharField(max_length=150, blank=True, null=True, verbose_name=_('City'))
     address = models.CharField(max_length=1000, blank=True, null=True, verbose_name=_('Address'))
-    introduction_way = models.CharField(max_length=10, choices=INT_CHOICES, blank=True, null=True, verbose_name=_('Introduction Way'))
+    introduction_way = models.CharField(max_length=10, choices=choices.ways, blank=True, null=True, verbose_name=_('Introduction Way'))
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'پروفایل‌ها'
 
 
 # --------------------------------- Tasks ---------------------------------
@@ -79,31 +78,17 @@ def generate_unique_id():
 
 
 def generate_unique_code():
-    return ''.join(random.choices(string.digits + string.digits, k=6))
+    return ''.join(random.choices(string.digits + string.digits, k=10))
 
 
 class Task(models.Model):
-    TYPE_CHOICES = [
-        ('cns', _('Counseling')),
-        ('ses', _('Session')),
-        ('vis', _('Visit')),
-    ]
-    PAYMENT_CHOICES = [
-        ('yes', _('Yes')),
-        ('no', _('No')),
-    ]
-    STATUS_CHOICES = [
-        ('tkn', _('Taken')),
-        ('fre', _('Free')),
-        ('pen', _('Pending')),
-    ]
     task_counseling = models.ForeignKey(Counseling, on_delete=models.CASCADE, related_name='counseling_task', blank=True, null=True)
     task_session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='session_task', blank=True, null=True)
     task_visit = models.ForeignKey(Visit, on_delete=models.CASCADE, related_name='visit_task', blank=True, null=True)
-    type = models.CharField(max_length=6, choices=TYPE_CHOICES, null=True, blank=True, verbose_name=_('Task Type'))
-    is_paid = models.CharField(max_length=10, choices=PAYMENT_CHOICES, blank=True, null=True, default='no', verbose_name=_('Payment Status'))
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, blank=True, null=True, default='fre', verbose_name=_('Request Status'))
-    code = models.CharField(max_length=6, null=True, unique=True, blank=True)
+    type = models.CharField(max_length=6, choices=choices.task_types, null=True, blank=True, verbose_name=_('Task Type'))
+    is_paid = models.CharField(max_length=10, choices=choices.payment_statuses, blank=True, null=True, default='no', verbose_name=_('Payment Status'))
+    status = models.CharField(max_length=10, choices=choices.statuses, blank=True, null=True, default='fre', verbose_name=_('Request Status'))
+    code = models.CharField(max_length=10, null=True, unique=True, blank=True)
     datetime_created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date and Time of Creation'))
 
     def save(self, *args, **kwargs):
@@ -116,6 +101,8 @@ class Task(models.Model):
 
     class Meta:
         ordering = ('-datetime_created',)
+        verbose_name = 'وظیفه'
+        verbose_name_plural = 'وظایف'
 
 
 

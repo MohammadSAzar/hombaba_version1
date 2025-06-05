@@ -3,15 +3,8 @@ import os
 from django.contrib.messages import constants as messages
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(w91ur*40um)^2j1zc)eq2#vp298#fb2*qo!qoaa#@%#wt8b+_'
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 
@@ -155,8 +148,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
-# MEDIA_ROOT = BASE_DIR / 'media'
+
+SECURE_SSL_REDIRECT = False
 
 
 

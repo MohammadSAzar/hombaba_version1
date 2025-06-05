@@ -43,20 +43,16 @@
                                             <span class="font-bold">{{ counseling.get_counseling_type_display }}</span>
                                         </div>
                                     </div>
-                                    <!-- customer type -->
-                                    <div class="flex items-center justify-between gap-x-2 py-6">
-                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Customer type' %}</div>
-                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
-                                            <span class="font-bold">{{ counseling.get_customer_type_display }}</span>
-                                        </div>
-                                    </div>
+
+
                                     <!-- date -->
                                     <div class="flex items-center justify-between gap-x-2 py-6">
                                         <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Counseling date' %}</div>
                                         <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
-                                            <span class="font-bold">{{ counseling.get_date_display }}</span>
+                                            <span class="font-bold">{{ counseling.date }}</span>
                                         </div>
                                     </div>
+
                                     <!-- time -->
                                     <div class="flex items-center justify-between gap-x-2 py-6">
                                         <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Counseling time' %}</div>
@@ -64,6 +60,7 @@
                                             <span class="font-bold">{{ counseling.get_time_display }}</span>
                                         </div>
                                     </div>
+
                                     <!-- name & family -->
                                     <div class="flex items-center justify-between gap-x-2 py-6">
                                         <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Name & Family' %}</div>
@@ -85,7 +82,7 @@
                         <div class="col-span-6 md:col-span-4">
 
                             <!-- Desktop -->
-                            <div class="hidden rounded-lg bg-primary-light p-4 dark:bg-secondary-dark md:block">
+                            <div class="hidden rounded-lg bg-primary-light  p-4 dark:bg-secondary-dark md:block">
                                 <div class="mb-2 divide-y divide-secondary-light dark:divide-primary-light/5">
 
                                     <!-- price -->
@@ -124,7 +121,7 @@
                             </div>
 
                             <!-- Mobile -->
-                            <div class="inset-x-0 bottom-0 items-center gap-x-6 rounded-t-2xl bg-primary-light p-4 dark:bg-secondary-dark md:hidden">
+                            <div class="inset-x-0 bottom-0 items-center  gap-x-6 rounded-t-2xl bg-primary-light p-4 dark:bg-secondary-dark md:hidden">
                                 <div class="flex flex-col gap-y-1">
 
                                     <!-- price -->
@@ -162,8 +159,6 @@
     </main>
 
 {% endblock %}
-
-
 
 
 

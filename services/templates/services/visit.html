@@ -84,6 +84,21 @@
                                         {% endif %}
                                     </div>
 
+                                    <!-- Type -->
+                                    <div class="col-span-2 md:col-span-1 mb-12">
+                                        <label for="{{ form.trade_type.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
+                                            <span class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-primary-light px-2 py-0.5 text-sm text-quaternary-600 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-sm dark:bg-secondary-dark dark:text-quaternary-300 mr-4">
+                                                {% trans 'Choose the trade type' %}
+                                            </span>
+                                            {% render_field form.trade_type type="text" id="trade_type" class="peer w-full rounded-lg border-none bg-transparent px-4 py-3 text-quaternary-700 placeholder-transparent focus:outline-none focus:ring-0 dark:text-primary-light" %}
+                                        </label>
+                                        {% if form.trade_type.errors %}
+                                            {% for error in form.trade_type.errors %}
+                                                <p style="color: red; font-size: 0.9em;">{{ error }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+
                                     <!-- Date -->
                                     <div class="col-span-2 md:col-span-1 mb-12">
                                         <label for="{{ form.date.id_for_label }}" class="relative block rounded-lg border border-secondary-light shadow-base dark:border-primary-light/5 mb-2">
@@ -139,45 +154,242 @@
                                 <!-- JS  -->
                                 <script>
                                     $(document).ready(function() {
-                                        $('#district').hide(); // Hide district field initially
+                                        if (hasFormErrors()) {
+                                            preserveFormStateWithErrors();
+                                        } else {
+                                            initializeForm();
+                                        }
 
-                                        $('#province').change(function() {
-                                            var provinceId = $(this).val();
+                                        function hasFormErrors() {
+                                            return $('.text-red-500, [style*="color: red"], .error, .field-error').length > 0 ||
+                                                   $('p[style*="color: red"]').length > 0;
+                                        }
+
+                                        function preserveFormStateWithErrors() {
+                                            var provinceVal = $('#province').val();
+                                            var cityVal = $('#city').val();
+                                            var districtVal = $('#district').val();
+
+                                            if (provinceVal && provinceVal !== '') {
+                                                showCityField();
+                                                if (cityVal && cityVal !== '') {
+                                                    showDistrictField();
+                                                }
+                                            }
+
+                                            if ($('#province option[value=""]').length === 0) {
+                                                $('#province').prepend('<option value="">-- انتخاب استان --</option>');
+                                            }
+                                            if ($('#city option[value=""]').length === 0) {
+                                                $('#city').prepend('<option value="">-- انتخاب شهر --</option>');
+                                            }
+                                            if ($('#district option[value=""]').length === 0) {
+                                                $('#district').prepend('<option value="">-- انتخاب محله (منطقه) --</option>');
+                                            }
+
+                                            if (provinceVal && provinceVal !== '' && $('#city option').length <= 1) {
+                                                loadCitiesForErrorState(provinceVal, cityVal);
+                                            }
+
+                                            if (cityVal && cityVal !== '' && $('#district option').length <= 1) {
+                                                loadDistrictsForErrorState(cityVal, districtVal);
+                                            }
+                                        }
+
+                                        function loadCitiesForErrorState(provinceId, selectedCityId) {
                                             $.ajax({
                                                 url: '/load_cities/',
                                                 data: {
                                                     'province': provinceId
                                                 },
+                                                method: 'GET',
                                                 success: function(data) {
-                                                    $('#city').html('');
-                                                    $('#district').hide(); // Hide district field when changing province
-                                                    $.each(data.cities, function(index, city) {
-                                                        $('#city').append(`<option value="${city[0]}">${city[1]}</option>`);
-                                                    });
-                                                    $('#city').trigger('change'); // Trigger change event on city select
+                                                    $('#city').html('<option value="">-- انتخاب شهر --</option>');
+
+                                                    if (data.cities && data.cities.length > 0) {
+                                                        $.each(data.cities, function(index, city) {
+                                                            var selected = (city[0] == selectedCityId) ? 'selected' : '';
+                                                            $('#city').append(`<option value="${city[0]}" ${selected}>${city[1]}</option>`);
+                                                        });
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error loading cities for error state:', error);
                                                 }
                                             });
-                                        });
+                                        }
 
-                                        $('#city').change(function() {
-                                            var cityId = $(this).val();
+                                        function loadDistrictsForErrorState(cityId, selectedDistrictId) {
                                             $.ajax({
                                                 url: '/load_districts/',
                                                 data: {
                                                     'city': cityId
                                                 },
+                                                method: 'GET',
                                                 success: function(data) {
-                                                    $('#district').html('');
-                                                    if (data.districts.length > 0) {
-                                                        $('#district').show(); // Show district field only if there are districts
-                                                        $.each(data.districts, function(index, district) {
-                                                            $('#district').append(`<option value="${district[0]}">${district[1]}</option>`);
+                                                    $('#district').html('<option value="">-- انتخاب محله (منطقه) --</option>');
+
+                                                    if (data.districts && data.districts.length > 0) {
+                                                        var sortedDistricts = data.districts.slice();
+                                                        sortedDistricts.sort(function(a, b) {
+                                                            var numA = parseInt(a[1].replace('منطقه ', '').trim()) || 0;
+                                                            var numB = parseInt(b[1].replace('منطقه ', '').trim()) || 0;
+                                                            return numA - numB;
                                                         });
-                                                    } else {
-                                                        $('#district').hide(); // Hide district field if there are no districts
+
+                                                        $.each(sortedDistricts, function(index, district) {
+                                                            var selected = (district[0] == selectedDistrictId) ? 'selected' : '';
+                                                            $('#district').append(`<option value="${district[0]}" ${selected}>${district[1]}</option>`);
+                                                        });
                                                     }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error loading districts for error state:', error);
                                                 }
                                             });
+                                        }
+
+                                        function initializeForm() {
+                                            clearCityDropdown();
+                                            clearDistrictDropdown();
+                                            hideCityField();
+                                            hideDistrictField();
+
+                                            if ($('#province option[value=""]').length === 0) {
+                                                $('#province').prepend('<option value="">-- انتخاب استان --</option>');
+                                            }
+                                            $('#province').val('');
+                                        }
+
+                                        function clearCityDropdown() {
+                                            $('#city').html('<option value="">-- انتخاب شهر --</option>');
+                                            $('#city').val('');
+                                        }
+
+                                        function clearDistrictDropdown() {
+                                            $('#district').html('<option value="">-- انتخاب محله (منطقه) --</option>');
+                                            $('#district').val('');
+                                        }
+
+                                        function showCityField() {
+                                            $('#city').closest('.col-span-2').show();
+                                        }
+
+                                        function hideCityField() {
+                                            $('#city').closest('.col-span-2').hide();
+                                        }
+
+                                        function showDistrictField() {
+                                            $('#district').closest('.col-span-2').show();
+                                        }
+
+                                        function hideDistrictField() {
+                                            $('#district').closest('.col-span-2').hide();
+                                        }
+
+                                        $('#province').change(function() {
+                                            var provinceId = $(this).val();
+
+                                            if (!$(this).data('programmatic-change')) {
+                                                clearCityDropdown();
+                                                clearDistrictDropdown();
+                                                hideDistrictField();
+
+                                                if (provinceId === '' || provinceId === null) {
+                                                    hideCityField();
+                                                } else {
+                                                    loadCities(provinceId);
+                                                }
+                                            }
+                                        });
+
+                                        $('#city').change(function() {
+                                            var cityId = $(this).val();
+
+                                            if (!$(this).data('programmatic-change')) {
+                                                clearDistrictDropdown();
+                                                hideDistrictField();
+
+                                                if (cityId !== '' && cityId !== null) {
+                                                    loadDistricts(cityId);
+                                                }
+                                            }
+                                        });
+
+                                        function loadCities(provinceId) {
+                                            $('#city').html('<option value="">در حال بارگذاری شهرها ...</option>');
+                                            showCityField();
+
+                                            $.ajax({
+                                                url: '/load_cities/',
+                                                data: {
+                                                    'province': provinceId
+                                                },
+                                                method: 'GET',
+                                                success: function(data) {
+                                                    clearCityDropdown();
+
+                                                    if (data.cities && data.cities.length > 0) {
+                                                        $.each(data.cities, function(index, city) {
+                                                            $('#city').append(`<option value="${city[0]}">${city[1]}</option>`);
+                                                        });
+                                                        showCityField();
+                                                    } else {
+                                                        $('#city').html('<option value="">شهری یافت نشد</option>');
+                                                        showCityField();
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error loading cities:', error);
+                                                    $('#city').html('<option value="">خطا در بارگذاری شهرها</option>');
+                                                    showCityField();
+                                                }
+                                            });
+                                        }
+
+                                        function loadDistricts(cityId) {
+                                            // Show loading state
+                                            $('#district').html('<option value="">در حال بارگذاری محله‌ها (مناطق)</option>');
+                                            showDistrictField();
+
+                                            $.ajax({
+                                                url: '/load_districts/',
+                                                data: {
+                                                    'city': cityId
+                                                },
+                                                method: 'GET',
+                                                success: function(data) {
+                                                    clearDistrictDropdown();
+
+                                                    if (data.districts && data.districts.length > 0) {
+                                                        var sortedDistricts = data.districts.slice();
+                                                        sortedDistricts.sort(function(a, b) {
+                                                            var numA = parseInt(a[1].replace('منطقه ', '').trim()) || 0;
+                                                            var numB = parseInt(b[1].replace('منطقه ', '').trim()) || 0;
+                                                            return numA - numB;
+                                                        });
+
+                                                        $.each(sortedDistricts, function(index, district) {
+                                                            $('#district').append(`<option value="${district[0]}">${district[1]}</option>`);
+                                                        });
+                                                        showDistrictField();
+                                                    } else {
+                                                        $('#district').html('<option value="">محله (منطقه‌ای) یافت نشد</option>');
+                                                        showDistrictField();
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error loading districts:', error);
+                                                    $('#district').html('<option value="">خطا در بارگذاری محله‌ها (مناطق)</option>');
+                                                    showDistrictField();
+                                                }
+                                            });
+                                        }
+
+                                        $('form').on('reset', function() {
+                                            setTimeout(function() {
+                                                initializeForm();
+                                            }, 10);
                                         });
                                     });
                                 </script>

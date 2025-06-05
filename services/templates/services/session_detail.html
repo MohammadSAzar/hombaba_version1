@@ -36,17 +36,25 @@
                             <div class="rounded-lg bg-primary-light p-4 dark:bg-secondary-dark md:block">
                                 <div class="mb-2 divide-y divide-secondary-light dark:divide-primary-light/5">
 
-                                    <!-- city -->
+                                    <!-- location -->
                                     <div class="flex items-center justify-between gap-x-2 py-6">
-                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Session type' %}</div>
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Location' %}</div>
                                         <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
-                                            <span class="font-bold">{{ session.get_city_display }}</span>
+                                            <span class="font-bold">{{ session.province }} | {{ session.city }} | {{ session.district }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- type -->
+                                    <div class="flex items-center justify-between gap-x-2 py-6">
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Trade type' %}</div>
+                                        <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
+                                            <span class="font-bold">{{ session.get_trade_type_display }}</span>
                                         </div>
                                     </div>
 
                                     <!-- customer type -->
                                     <div class="flex items-center justify-between gap-x-2 py-6">
-                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Session type' %}</div>
+                                        <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Customer type' %}</div>
                                         <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
                                             <span class="font-bold">{{ session.get_customer_type_display }}</span>
                                         </div>
@@ -56,7 +64,7 @@
                                     <div class="flex items-center justify-between gap-x-2 py-6">
                                         <div class="text-sm text-quaternary-600 dark:text-quaternary-300 lg:text-base">{% trans 'Session date' %}</div>
                                         <div class="text-sm text-tertiary-500 dark:text-tertiary-400 lg:text-base">
-                                            <span class="font-bold">{{ session.get_date_display }}</span>
+                                            <span class="font-bold">{{ session.date }}</span>
                                         </div>
                                     </div>
 
